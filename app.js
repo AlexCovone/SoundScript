@@ -20,7 +20,7 @@ app.use(express.json());
 
 //Routes
 app.get("/", (req, res) => {
-  res.render("index.ejs");
+  res.render("index.ejs", { subscriptionKey, serviceRegion });
 });
 
 app.post("/textToSpeech", async (req, res) => {
