@@ -1,86 +1,350 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Microsoft Cognitive Services Speech SDK JavaScript</title>
+    <title>Break Down the Language Barrier</title>
     <meta charset="utf-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/png" sizes="32x32" href="/imgs/languages32x32.png" />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body class="body bg-slate-500 text-lg">
-    <div id="warning">
-      <h1 style="font-weight: 500">Speech Recognition Speech SDK not found (microsoft.cognitiveservices.speech.sdk.bundle.js missing).</h1>
-    </div>
+    <div class="bg-white">
+      <!-- Header -->
+      <header class="absolute inset-x-0 top-0 z-50">
+        <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+          <div class="flex lg:flex-1">
+            <a href="#" class="-m-1.5 p-1.5">
+              <span class="sr-only">Your Company</span>
+              <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+            </a>
+          </div>
+          <div class="flex lg:hidden">
+            <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            </button>
+          </div>
+          <div class="hidden lg:flex lg:gap-x-12">
+            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Product</a>
+            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Features</a>
+            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Marketplace</a>
+            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a>
+          </div>
+          <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </nav>
+      </header>
 
-    <div id="content" style="display: none">
-      <table width="100%">
-        <tr>
-          <td></td>
-          <td><h1 style="font-weight: 500">Microsoft Cognitive Services Speech SDK</h1></td>
-        </tr>
-        <tr class="hidden">
-          <td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>
-          <td><input id="subscriptionKey" type="password" size="40" value="<%= subscriptionKey %>" /></td>
-        </tr>
-        <tr class="hidden">
-          <td align="right">Region</td>
-          <td><input id="serviceRegion" type="text" size="40" value="<%= serviceRegion %>" /></td>
-        </tr>
-        <tr>
-          <td align="right">Source Language</td>
-          <td>
-            <select id="languageSourceOptions">
-              <option value="ar-EG">Arabic - EG</option>
-              <option selected="selected" value="de-DE">German - DE</option>
-              <option value="en-US">English - US</option>
-              <option value="es-ES">Spanish - ES</option>
-              <option value="fi-FI">Finnish - FI</option>
-              <option value="fr-FR">French - FR</option>
-              <option value="hi-IN">Hindi - IN</option>
-              <option value="it-IT">Italian - IT</option>
-              <option value="ja-JP">Japanese - JP</option>
-              <option value="ko-KR">Korean - KR</option>
-              <option value="pl-PL">Polish - PL</option>
-              <option value="pt-BR">Portuguese - BR</option>
-              <option value="ru-RU">Russian - RU</option>
-              <option value="sv-SE">Swedish - SE</option>
-              <option value="zh-Hans">Chinese - Simplified</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td align="right">Target Language</td>
-          <td>
-            <select id="languageTargetOptions">
-              <option value="ar">Arabic</option>
-              <option selected="selected" value="de">German</option>
-              <option value="en">English</option>
-              <option value="es">Spanish</option>
-              <option value="fi">Finnish</option>
-              <option value="fr">French</option>
-              <option value="hi">Hindi</option>
-              <option value="it">Italian</option>
-              <option value="ja">Japanese</option>
-              <option value="ko">Korean</option>
-              <option value="pl">Polish</option>
-              <option value="pt">Portuguese</option>
-              <option value="ru">Russian</option>
-              <option value="sv">Swedish</option>
-              <option value="zh-Hans">Chinese</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td><button id="startRecognizeOnceAsyncButton" class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">Start Recognition</button></td>
-        </tr>
-        <tr>
-          <td align="right" valign="top">Results</td>
-          <td><textarea id="phraseDiv" style="display: inline-block; width: 500px; height: 200px"></textarea></td>
-        </tr>
-      </table>
-      <h2 id="getText">Text to speech</h2>
+      <main>
+        <!-- Hero section -->
+        <div class="relative isolate pt-14">
+          <svg class="absolute inset-0 -z-10 hidden h-full w-full stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] sm:block" aria-hidden="true">
+            <defs>
+              <pattern id="55d3d46d-692e-45f2-becd-d8bdc9344f45" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
+                <path d="M.5 200V.5H200" fill="none" />
+              </pattern>
+            </defs>
+            <svg x="50%" y="0" class="overflow-visible fill-gray-50">
+              <path d="M-200.5 0h201v201h-201Z M599.5 0h201v201h-201Z M399.5 400h201v201h-201Z M-400.5 600h201v201h-201Z" stroke-width="0" />
+            </svg>
+            <rect width="100%" height="100%" stroke-width="0" fill="url(#55d3d46d-692e-45f2-becd-d8bdc9344f45)" />
+          </svg>
+          <div class="relative">
+            <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl" aria-hidden="true">
+              <div
+                class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc]"
+                style="
+                  clip-path: polygon(
+                    74.1% 44.1%,
+                    100% 61.6%,
+                    97.5% 26.9%,
+                    85.5% 0.1%,
+                    80.7% 2%,
+                    72.5% 32.5%,
+                    60.2% 62.4%,
+                    52.4% 68.1%,
+                    47.5% 58.3%,
+                    45.2% 34.5%,
+                    27.5% 76.7%,
+                    0.1% 64.9%,
+                    17.9% 100%,
+                    27.6% 76.8%,
+                    76.1% 97.7%,
+                    74.1% 44.1%
+                  );
+                "
+              ></div>
+            </div>
+            <div class="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-8 opacity-25 blur-3xl xl:justify-end" aria-hidden="true">
+              <div
+                class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] xl:ml-0 xl:mr-[calc(50%-12rem)]"
+                style="
+                  clip-path: polygon(
+                    74.1% 44.1%,
+                    100% 61.6%,
+                    97.5% 26.9%,
+                    85.5% 0.1%,
+                    80.7% 2%,
+                    72.5% 32.5%,
+                    60.2% 62.4%,
+                    52.4% 68.1%,
+                    47.5% 58.3%,
+                    45.2% 34.5%,
+                    27.5% 76.7%,
+                    0.1% 64.9%,
+                    17.9% 100%,
+                    27.6% 76.8%,
+                    76.1% 97.7%,
+                    74.1% 44.1%
+                  );
+                "
+              ></div>
+            </div>
+          </div>
+          <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
+            <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
+              <div class="flex">
+                <div class="relative flex items-center gap-x-4 rounded-full px-4 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                  <a href="https://www.alexcovone.com/" target="_blank" class="flex items-center font-semibold gap-x-1">
+                    <span class="font-semibold text-indigo-600">Developed by Alex Covone</span>
+                    <svg class="-mr-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <h1 class="mt-10 max-w-lg text-4xl font-bold tracking-tighter text-gray-900 sm:text-6xl">Translate Instantly</h1>
+              <p class="mt-6 text-lg leading-8 text-gray-600">
+                Your ultimate language companion. Break down the language barrier instantly. Speak directly into your device and witness translations up to 15 languages!
+              </p>
+              <div class="mt-6 flex items-center gap-x-6">
+                <div>
+                  <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Source Language</label>
+                  <select id="languageSourceOptions" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <option value="ar-EG">Arabic - EG</option>
+                    <option value="de-DE">German - DE</option>
+                    <option selected="selected" value="en-US">English - US</option>
+                    <option value="es-ES">Spanish - ES</option>
+                    <option value="fi-FI">Finnish - FI</option>
+                    <option value="fr-FR">French - FR</option>
+                    <option value="hi-IN">Hindi - IN</option>
+                    <option value="it-IT">Italian - IT</option>
+                    <option value="ja-JP">Japanese - JP</option>
+                    <option value="ko-KR">Korean - KR</option>
+                    <option value="pl-PL">Polish - PL</option>
+                    <option value="pt-BR">Portuguese - BR</option>
+                    <option value="ru-RU">Russian - RU</option>
+                    <option value="sv-SE">Swedish - SE</option>
+                    <option value="zh-Hans">Chinese - Simplified</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Target Language</label>
+                  <select id="languageTargetOptions" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <option value="ar">Arabic</option>
+                    <option selected="selected" value="de">German</option>
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fi">Finnish</option>
+                    <option value="fr">French</option>
+                    <option value="hi">Hindi</option>
+                    <option value="it">Italian</option>
+                    <option value="ja">Japanese</option>
+                    <option value="ko">Korean</option>
+                    <option value="pl">Polish</option>
+                    <option value="pt">Portuguese</option>
+                    <option value="ru">Russian</option>
+                    <option value="sv">Swedish</option>
+                    <option value="zh-Hans">Chinese</option>
+                  </select>
+                </div>
+              </div>
+              <table class="hidden">
+                <tr class="hidden">
+                  <td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>
+                  <td><input id="subscriptionKey" type="password" size="40" value="<%= subscriptionKey %>" /></td>
+                </tr>
+                <tr class="hidden">
+                  <td align="right">Region</td>
+                  <td><input id="serviceRegion" type="text" size="40" value="<%= serviceRegion %>" /></td>
+                </tr>
+              </table>
+              <div class="mt-10 flex items-center gap-x-6">
+                <button
+                  
+                  id="startRecognizeOnceAsyncButton"
+                  class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >Translate</button
+                >
+                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
+              </div>
+
+              <textarea id="phraseDiv" style="display: inline-block; width: 500px; height: 200px"></textarea>
+            </div>
+            <div class="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0 lg:flex-grow">
+              <svg viewBox="0 0 366 729" role="img" class="mx-auto w-[22.875rem] max-w-full drop-shadow-xl">
+                <title>App screenshot</title>
+                <defs>
+                  <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
+                    <rect width="316" height="684" rx="36" />
+                  </clipPath>
+                </defs>
+                <path
+                  fill="#4B5563"
+                  d="M363.315 64.213C363.315 22.99 341.312 1 300.092 1H66.751C25.53 1 3.528 22.99 3.528 64.213v44.68l-.857.143A2 2 0 0 0 1 111.009v24.611a2 2 0 0 0 1.671 1.973l.95.158a2.26 2.26 0 0 1-.093.236v26.173c.212.1.398.296.541.643l-1.398.233A2 2 0 0 0 1 167.009v47.611a2 2 0 0 0 1.671 1.973l1.368.228c-.139.319-.314.533-.511.653v16.637c.221.104.414.313.56.689l-1.417.236A2 2 0 0 0 1 237.009v47.611a2 2 0 0 0 1.671 1.973l1.347.225c-.135.294-.302.493-.49.607v377.681c0 41.213 22 63.208 63.223 63.208h95.074c.947-.504 2.717-.843 4.745-.843l.141.001h.194l.086-.001 33.704.005c1.849.043 3.442.37 4.323.838h95.074c41.222 0 63.223-21.999 63.223-63.212v-394.63c-.259-.275-.48-.796-.63-1.47l-.011-.133 1.655-.276A2 2 0 0 0 366 266.62v-77.611a2 2 0 0 0-1.671-1.973l-1.712-.285c.148-.839.396-1.491.698-1.811V64.213Z"
+                />
+                <path fill="#343E4E" d="M16 59c0-23.748 19.252-43 43-43h246c23.748 0 43 19.252 43 43v615c0 23.196-18.804 42-42 42H58c-23.196 0-42-18.804-42-42V59Z" />
+                <foreignObject width="316" height="684" transform="translate(24 24)" clip-path="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)">
+                  <img src="https://tailwindui.com/img/component-images/mobile-app-screenshot.png" alt="" />
+                </foreignObject>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logo cloud -->
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="mx-auto grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-12 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+            <img
+              class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+              src="https://tailwindui.com/img/logos/158x48/transistor-logo-gray-400.svg"
+              alt="Transistor"
+              width="158"
+              height="48"
+            />
+            <img
+              class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+              src="https://tailwindui.com/img/logos/158x48/reform-logo-gray-400.svg"
+              alt="Reform"
+              width="158"
+              height="48"
+            />
+            <img
+              class="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+              src="https://tailwindui.com/img/logos/158x48/tuple-logo-gray-400.svg"
+              alt="Tuple"
+              width="158"
+              height="48"
+            />
+            <img
+              class="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
+              src="https://tailwindui.com/img/logos/158x48/savvycal-logo-gray-400.svg"
+              alt="SavvyCal"
+              width="158"
+              height="48"
+            />
+            <img
+              class="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
+              src="https://tailwindui.com/img/logos/158x48/statamic-logo-gray-400.svg"
+              alt="Statamic"
+              width="158"
+              height="48"
+            />
+          </div>
+        </div>
+
+        <!-- Feature section -->
+        <div class="mx-auto mt-32 pb-10 max-w-7xl sm:mt-56 sm:px-6 lg:px-8">
+          <div class="relative isolate overflow-hidden bg-gray-900 px-6 py-20 sm:rounded-3xl sm:px-10 sm:py-24 lg:py-24 xl:px-24">
+            <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-0">
+              <div class="lg:row-start-2 lg:max-w-md">
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Boost your productivity.<br />Start using our app today.</h2>
+                <p class="mt-6 text-lg leading-8 text-gray-300">
+                  Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla. Ac euismod vel sit maecenas.
+                </p>
+              </div>
+              <img
+                src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+                alt="Product screenshot"
+                class="relative -z-20 min-w-full max-w-xl rounded-xl shadow-xl ring-1 ring-white/10 lg:row-span-4 lg:w-[64rem] lg:max-w-none"
+                width="2432"
+                height="1442"
+              />
+              <div class="max-w-xl lg:row-start-3 lg:mt-10 lg:max-w-md lg:border-t lg:border-white/10 lg:pt-10">
+                <dl class="max-w-xl space-y-8 text-base leading-7 text-gray-300 lg:max-w-none">
+                  <div class="relative">
+                    <dt class="ml-9 inline-block font-semibold text-white">
+                      <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.5 17a4.5 4.5 0 01-1.44-8.765 4.5 4.5 0 018.302-3.046 3.5 3.5 0 014.504 4.272A4 4 0 0115 17H5.5zm3.75-2.75a.75.75 0 001.5 0V9.66l1.95 2.1a.75.75 0 101.1-1.02l-3.25-3.5a.75.75 0 00-1.1 0l-3.25 3.5a.75.75 0 101.1 1.02l1.95-2.1v4.59z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      Push to deploy.
+                    </dt>
+                    <dd class="inline">Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.</dd>
+                  </div>
+                  <div class="relative">
+                    <dt class="ml-9 inline-block font-semibold text-white">
+                      <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      SSL certificates.
+                    </dt>
+                    <dd class="inline">Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.</dd>
+                  </div>
+                  <div class="relative">
+                    <dt class="ml-9 inline-block font-semibold text-white">
+                      <svg class="absolute left-1 top-1 h-5 w-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M4.632 3.533A2 2 0 016.577 2h6.846a2 2 0 011.945 1.533l1.976 8.234A3.489 3.489 0 0016 11.5H4c-.476 0-.93.095-1.344.267l1.976-8.234z" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 13a2 2 0 100 4h12a2 2 0 100-4H4zm11.24 2a.75.75 0 01.75-.75H16a.75.75 0 01.75.75v.01a.75.75 0 01-.75.75h-.01a.75.75 0 01-.75-.75V15zm-2.25-.75a.75.75 0 00-.75.75v.01c0 .414.336.75.75.75H13a.75.75 0 00.75-.75V15a.75.75 0 00-.75-.75h-.01z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      Database backups.
+                    </dt>
+                    <dd class="inline">Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div
+              class="pointer-events-none absolute left-12 top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-3xl lg:bottom-[-12rem] lg:top-auto lg:translate-y-0 lg:transform-gpu"
+              aria-hidden="true"
+            >
+              <div
+                class="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-25"
+                style="
+                  clip-path: polygon(
+                    74.1% 44.1%,
+                    100% 61.6%,
+                    97.5% 26.9%,
+                    85.5% 0.1%,
+                    80.7% 2%,
+                    72.5% 32.5%,
+                    60.2% 62.4%,
+                    52.4% 68.1%,
+                    47.5% 58.3%,
+                    45.2% 34.5%,
+                    27.5% 76.7%,
+                    0.1% 64.9%,
+                    17.9% 100%,
+                    27.6% 76.8%,
+                    76.1% 97.7%,
+                    74.1% 44.1%
+                  );
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
     <!-- Speech SDK reference sdk. -->
