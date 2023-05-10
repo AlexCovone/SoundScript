@@ -68,6 +68,9 @@ document.querySelector('#getText').addEventListener('click', textToSpeech);
 async function textToSpeech() {
   try {
     const contentFromTextArea = document.querySelector('#phraseDiv').value;
+    const spinner = document.getElementById('spinner');
+
+    spinner.classList.remove('hidden');
 
     const response = await fetch('textToSpeech', {
       method: 'post',
@@ -77,6 +80,7 @@ async function textToSpeech() {
       }),
     });
     const data = await response.json();
+    spinner.classList.add('hidden');
     console.log(data);
   } catch (err) {
     console.log(err);

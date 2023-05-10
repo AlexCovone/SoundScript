@@ -109,7 +109,7 @@
             <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
               <div class="flex">
                 <div class="relative flex items-center gap-x-4 rounded-full px-4 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                  <a href="https://www.alexcovone.com/" target="_blank" class="flex items-center font-semibold gap-x-1">
+                  <a href="https://www.alexcovone.com/" target="_blank" class="flex items-center gap-x-1 font-semibold">
                     <span class="font-semibold text-indigo-600">Developed by Alex Covone</span>
                     <svg class="-mr-2 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path
@@ -128,7 +128,11 @@
               <div class="mt-6 flex items-center gap-x-6">
                 <div>
                   <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Source Language</label>
-                  <select id="languageSourceOptions" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <select
+                    id="languageSourceOptions"
+                    name="location"
+                    class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  >
                     <option value="ar-EG">Arabic - EG</option>
                     <option value="de-DE">German - DE</option>
                     <option selected="selected" value="en-US">English - US</option>
@@ -149,7 +153,11 @@
 
                 <div>
                   <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Target Language</label>
-                  <select id="languageTargetOptions" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                  <select
+                    id="languageTargetOptions"
+                    name="location"
+                    class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  >
                     <option value="ar">Arabic</option>
                     <option selected="selected" value="de">German</option>
                     <option value="en">English</option>
@@ -180,11 +188,18 @@
               </table>
               <div class="mt-10 flex items-center gap-x-6">
                 <button
-                  
                   id="startRecognizeOnceAsyncButton"
                   class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >Translate</button
                 >
+                  <span class="flex items-center">
+                    <span class="mr-1">Translate</span>
+                    <svg id="spinner" class="animate-spin ml-2 mr-1 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </span>
+                </button>
+
                 <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
               </div>
 
@@ -192,7 +207,7 @@
             </div>
             <div class="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0 lg:flex-grow">
               <svg viewBox="0 0 366 729" role="img" class="mx-auto w-[22.875rem] max-w-full drop-shadow-xl">
-                <title>App screenshot</title>
+                <title>Text Conversation with Translation</title>
                 <defs>
                   <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
                     <rect width="316" height="684" rx="36" />
@@ -204,7 +219,7 @@
                 />
                 <path fill="#343E4E" d="M16 59c0-23.748 19.252-43 43-43h246c23.748 0 43 19.252 43 43v615c0 23.196-18.804 42-42 42H58c-23.196 0-42-18.804-42-42V59Z" />
                 <foreignObject width="316" height="684" transform="translate(24 24)" clip-path="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)">
-                  <img src="https://tailwindui.com/img/component-images/mobile-app-screenshot.png" alt="" />
+                  <img src="/imgs/Text-messages.gif" alt="" />
                 </foreignObject>
               </svg>
             </div>
@@ -253,7 +268,7 @@
         </div>
 
         <!-- Feature section -->
-        <div class="mx-auto mt-32 pb-10 max-w-7xl sm:mt-56 sm:px-6 lg:px-8">
+        <div class="mx-auto mt-32 max-w-7xl pb-10 sm:mt-56 sm:px-6 lg:px-8">
           <div class="relative isolate overflow-hidden bg-gray-900 px-6 py-20 sm:rounded-3xl sm:px-10 sm:py-24 lg:py-24 xl:px-24">
             <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-center lg:gap-y-0">
               <div class="lg:row-start-2 lg:max-w-md">
