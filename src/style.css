@@ -11,3 +11,55 @@
 .body, .btn {
     font-family: 'Manrope', sans-serif;
 }
+
+.slideshow-container {
+  overflow: hidden;
+}
+
+.slideshow {
+  display: flex;
+  animation: slideAnimation 60s linear infinite;
+}
+
+.slideshow-inner {
+  display: flex;
+  width: max-content;
+  animation: slideInnerAnimation 60s linear infinite;
+}
+
+.slide {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  margin-right: 10rem; /* Adjust as needed */
+}
+
+@keyframes slideAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-232%);
+  }
+}
+
+@keyframes slideInnerAnimation {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  16.66% {
+    transform: translateX(-16.66%);
+  }
+  33.33% {
+    transform: translateX(-33.33%);
+  }
+  49.99% {
+    transform: translateX(-49.99%);
+  }
+  66.66% {
+    transform: translateX(-66.66%);
+  }
+  83.33% {
+    transform: translateX(-83.33%);
+  }
+}
