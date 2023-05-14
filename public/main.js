@@ -67,7 +67,7 @@ document.querySelector('#getText').addEventListener('click', textToSpeech);
 
 async function textToSpeech() {
   try {
-    const contentFromTextArea = document.querySelector('#phraseDiv').value;
+    const contentFromTextArea = document.querySelector('#phraseDiv').innerHTML;
     console.log('textToSpeech function fired.')
 
     const response = await fetch('textToSpeech', {
