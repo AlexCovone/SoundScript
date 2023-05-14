@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
         window.console.log(translation);
         phraseDiv.innerHTML += translation;
 
+        // TODO:
+        // if(user){ store in database }
+        console.log(`${translation} has been logged.`) // Translation
+        console.log(languageSourceOptions.value) // Source language value
+        console.log(languageTargetOptions.value) // Target language value
+
         recognizer.close();
         recognizer = undefined;
       },
@@ -65,21 +71,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.querySelector('#getText').addEventListener('click', textToSpeech);
 
-async function textToSpeech() {
-  try {
-    const contentFromTextArea = document.querySelector('#phraseDiv').innerHTML;
-    console.log('textToSpeech function fired.')
+// async function textToSpeech() {
+//   try {
+//     const contentFromTextArea = document.querySelector('#phraseDiv').innerHTML;
+//     console.log('textToSpeech function fired.')
+//     console.log('check check check')
 
-    const response = await fetch('textToSpeech', {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sendText: contentFromTextArea,
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
-  } catch (err) {
-    console.log(err);
-  }
-}
+//     const response = await fetch('textToSpeech', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({
+//         sendText: contentFromTextArea,
+//       }),
+//     });
+//     const data = await response.json();
+//     console.log(data);
+
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }

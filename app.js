@@ -1,64 +1,108 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const logger = require("morgan");
+const mongoose = require('mongoose');
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const connectDB = require('./config/database');
+const methodOverride = require('method-override');
+const flash = require('express-flash');
+const logger = require('morgan');
+const mainRoutes = require('./routes/main');
 
-require("dotenv").config({ path: "./config/.env" });
+require('dotenv').config({ path: './config/.env' });
+
+// Passport config
+require('./config/passport')(passport);
+
+//Connect To Database
+connectDB();
 
 // pull in the required packages.
-const sdk = require("microsoft-cognitiveservices-speech-sdk");
-const fs = require("fs");
-const path = require("path");
+const sdk = require('microsoft-cognitiveservices-speech-sdk');
+const fs = require('fs');
+const path = require('path');
 
 const subscriptionKey = process.env.MS_KEY;
 const serviceRegion = process.env.MS_REGION;
-const filename = "YourAudioFile.wav";
+const filename = 'YourAudioFile.wav';
 
 //Server Setup
-app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Logging
-app.use(logger("dev"));
+app.use(logger('dev'));
 
-//Routes
-app.get("/", (req, res) => {
-  res.render("index.ejs", { subscriptionKey, serviceRegion });
+//Use forms for put / delete
+app.use(methodOverride('_method'));
+
+// Setup Sessions - stored in MongoDB
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Use flash messages for errors, info, ect...
+app.use(flash());
+
+//Setup Routes For Which The Server Is Listening
+app.use('/', mainRoutes);
+
+// 404 Error Handling
+app.get('*', function (req, res) {
+  res.status(404);
+
+  if (req.user) {
+    // Button redirects user to /events
+    return res.render('404', { user: req.user });
+  } else {
+    // Button redirects user to /
+    return res.render('404');
+  }
 });
 
-app.post("/textToSpeech", async (req, res) => {
+//Routes
+// app.get('/', (req, res) => {
+//   res.render('index.ejs', { subscriptionKey, serviceRegion });
+// });
+
+// TODO: REMOVE?
+app.post('/textToSpeech', async (req, res) => {
   try {
     // now create the audio-config pointing to our stream and
     // the speech config specifying the language.
     var audioConfig = sdk.AudioConfig.fromAudioFileOutput(filename);
-    var speechConfig = sdk.SpeechConfig.fromSubscription(
-      subscriptionKey,
-      serviceRegion
-    );
+    var speechConfig = sdk.SpeechConfig.fromSubscription(subscriptionKey, serviceRegion);
 
     // create the speech synthesizer.
     var synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig);
 
     // start the synthesizer and wait for a result.
-    console.log("text: ", req.body);
+    console.log('text: ', req.body);
     synthesizer.speakTextAsync(
       req.body.sendText,
       function (result) {
         if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
-          console.log("synthesis finished.");
+          console.log('synthesis finished.');
         } else {
-          console.error(
-            "Speech synthesis canceled, " +
-              result.errorDetails +
-              "\nDid you update the subscription info?"
-          );
+          console.error('Speech synthesis canceled, ' + result.errorDetails + '\nDid you update the subscription info?');
         }
         synthesizer.close();
         synthesizer = undefined;
       },
       function (err) {
-        console.trace("err - " + err);
+        console.trace('err - ' + err);
         synthesizer.close();
         synthesizer = undefined;
       }

@@ -11,14 +11,24 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cloudinary": "^1.26.1",
+    "connect-mongo": "^3.2.0",
     "daisyui": "^2.51.6",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
     "https-proxy-agent": "^3.0.0",
+    "method-override": "^3.0.0",
     "microsoft-cognitiveservices-speech-sdk": "^1.17.0",
-    "multer": "^1.4.2"
+    "mongodb": "^5.5.0",
+    "mongoose": "^5.12.3",
+    "multer": "^1.4.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
