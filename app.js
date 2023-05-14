@@ -56,7 +56,12 @@ app.use(passport.session());
 //Use flash messages for errors, info, ect...
 app.use(flash());
 
-//Setup Routes For Which The Server Is Listening
+// Landing Page Route
+app.get('/', (req, res) => {
+  res.render('index.ejs', { subscriptionKey, serviceRegion });
+});
+
+// Login, Logout, Signup Routes
 app.use('/', mainRoutes);
 
 // 404 Error Handling
@@ -72,45 +77,40 @@ app.get('*', function (req, res) {
   }
 });
 
-//Routes
-// app.get('/', (req, res) => {
-//   res.render('index.ejs', { subscriptionKey, serviceRegion });
-// });
-
 // TODO: REMOVE?
-app.post('/textToSpeech', async (req, res) => {
-  try {
-    // now create the audio-config pointing to our stream and
-    // the speech config specifying the language.
-    var audioConfig = sdk.AudioConfig.fromAudioFileOutput(filename);
-    var speechConfig = sdk.SpeechConfig.fromSubscription(subscriptionKey, serviceRegion);
+// app.post('/textToSpeech', async (req, res) => {
+//   try {
+//     // now create the audio-config pointing to our stream and
+//     // the speech config specifying the language.
+//     var audioConfig = sdk.AudioConfig.fromAudioFileOutput(filename);
+//     var speechConfig = sdk.SpeechConfig.fromSubscription(subscriptionKey, serviceRegion);
 
-    // create the speech synthesizer.
-    var synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig);
+//     // create the speech synthesizer.
+//     var synthesizer = new sdk.SpeechSynthesizer(speechConfig, audioConfig);
 
-    // start the synthesizer and wait for a result.
-    console.log('text: ', req.body);
-    synthesizer.speakTextAsync(
-      req.body.sendText,
-      function (result) {
-        if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
-          console.log('synthesis finished.');
-        } else {
-          console.error('Speech synthesis canceled, ' + result.errorDetails + '\nDid you update the subscription info?');
-        }
-        synthesizer.close();
-        synthesizer = undefined;
-      },
-      function (err) {
-        console.trace('err - ' + err);
-        synthesizer.close();
-        synthesizer = undefined;
-      }
-    );
-  } catch (err) {
-    console.log(err);
-  }
-});
+//     // start the synthesizer and wait for a result.
+//     console.log('text: ', req.body);
+//     synthesizer.speakTextAsync(
+//       req.body.sendText,
+//       function (result) {
+//         if (result.reason === sdk.ResultReason.SynthesizingAudioCompleted) {
+//           console.log('synthesis finished.');
+//         } else {
+//           console.error('Speech synthesis canceled, ' + result.errorDetails + '\nDid you update the subscription info?');
+//         }
+//         synthesizer.close();
+//         synthesizer = undefined;
+//       },
+//       function (err) {
+//         console.trace('err - ' + err);
+//         synthesizer.close();
+//         synthesizer = undefined;
+//       }
+//     );
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 //Server Running
 app.listen(process.env.PORT, () => {
