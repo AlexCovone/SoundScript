@@ -25,7 +25,12 @@
           </div>
           <div class="hidden lg:flex lg:flex-1 lg:justify-end">
             <a href="#" class="btn-ghost btn mr-3 text-sm font-semibold leading-6 text-slate-950">History</a>
-            <a href="#" class="btn-ghost btn text-sm font-semibold leading-6 text-slate-950">Log in <span aria-hidden="true">&rarr;</span></a>
+            <a href="#" class="btn-ghost btn text-sm font-semibold leading-6 text-slate-950"
+              >Login
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
           </div>
         </nav>
       </header>
@@ -190,6 +195,7 @@
               </table>
 
               <!-- Translation Display -->
+              <!-- If user is logged in, render -->
               <figure class="col-span-2 mt-16 hidden xs:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
                 <blockquote class="p-12 text-xl leading-8 tracking-tight text-gray-900">
                   <p id="phraseDiv">
@@ -197,7 +203,7 @@
                     orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.”
                   </p>
                 </blockquote>
-                <!-- If user is logged in, render -->
+                <!-- Name, translate from, img -->
                 <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
                   <img
                     class="h-10 w-10 flex-none rounded-full bg-gray-50"
@@ -206,9 +212,18 @@
                   />
                   <div class="flex-auto">
                     <div class="font-semibold">Alex Covone</div>
-                    <div class="">Translated from <span class="font-semibold">English</span> to <span class="font-semibold">German</span></div>
+                    <div class=""><%= date %></div>
+                    
                   </div>
-                  <img class="h-10 w-auto flex-none" src="/imgs/language.png" alt="SoundScript Logo" />
+                  <a href="" class="btn-ghost btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                      />
+                    </svg>
+                  </a>
                 </figcaption>
               </figure>
 

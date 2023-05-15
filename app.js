@@ -56,9 +56,13 @@ app.use(passport.session());
 //Use flash messages for errors, info, ect...
 app.use(flash());
 
+
 // Landing Page Route
+const { getFormattedCurrentDate } = require("./controllers/services/helperFunctions")
+
 app.get('/', (req, res) => {
-  res.render('index.ejs', { subscriptionKey, serviceRegion });
+  const date = getFormattedCurrentDate()
+  res.render('index.ejs', { date, subscriptionKey, serviceRegion });
 });
 
 // Login, Logout, Signup Routes
