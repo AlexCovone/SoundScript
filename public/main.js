@@ -74,23 +74,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.querySelector('#getText').addEventListener('click', textToSpeech);
 
-// async function textToSpeech() {
-//   try {
-//     const contentFromTextArea = document.querySelector('#phraseDiv').innerHTML;
-//     console.log('textToSpeech function fired.')
-//     console.log('check check check')
+async function textToSpeech() {
+  try {
+    const contentFromTextArea = document.querySelector('#phraseDiv').innerHTML;
+    console.log('textToSpeech function fired.')
+    console.log('check check check')
 
-//     const response = await fetch('textToSpeech', {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({
-//         sendText: contentFromTextArea,
-//       }),
-//     });
-//     const data = await response.json();
-//     console.log(data);
+    const response = await fetch('textToSpeech', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sendText: contentFromTextArea,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
 
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+  } catch (err) {
+    console.log(err);
+  }
+}
