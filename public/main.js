@@ -51,7 +51,10 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       function (err) {
         startRecognizeOnceAsyncButton.disabled = false;
-        phraseDiv.innerHTML += err;
+        // TODO:
+        // Add alert?
+        phraseDiv.innerHTML += 'Requested device not found. Please initialize microphone.';
+        console.log(err)
         window.console.log(err);
 
         recognizer.close();
