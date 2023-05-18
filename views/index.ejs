@@ -24,13 +24,22 @@
             </a>
           </div>
           <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" class="btn-ghost btn mr-3 text-sm font-semibold leading-6 text-slate-950">History</a>
+            <% if (!user) { %>
             <a href="/login" class="btn-ghost btn text-sm font-semibold leading-6 text-slate-950"
               >Login
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </a>
+            <% } else { %>
+            <a href="#" class="btn-ghost btn mr-3 text-sm font-semibold leading-6 text-slate-950">History</a>
+            <a href="/logout" class="btn-ghost btn text-sm font-semibold leading-6 text-slate-950"
+              >Logout
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <% } %>
           </div>
         </nav>
       </header>
@@ -207,15 +216,25 @@
                 <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
                   <img
                     class="h-10 w-10 flex-none rounded-full bg-gray-50"
-                    src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80"
-                    alt=""
+                    <% if (!user) { %>
+                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80"
+                      <% } else { %>
+                        <%= user.image %>
+                      <% } %>
+                    alt="Profile Picture"
                   />
                   <div class="flex-auto">
-                    <div class="font-semibold">Alex Covone</div>
-                    <div class=""><%= date %></div>
                     
+
+                    <% if (!user) { %>
+                      <div class="font-semibold">Alex Covone</div>
+                      <% } else { %>
+                        <div class="font-semibold"><%= user.displayName %></div>
+                      <% } %>
+
+                    <div class=""><%= date %></div>
                   </div>
-                  <a href="" class="btn-ghost btn">
+                  <button id="save" class="btn-ghost btn">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
                       <path
                         stroke-linecap="round"
@@ -223,7 +242,7 @@
                         d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
                       />
                     </svg>
-                  </a>
+                  </button>
                 </figcaption>
               </figure>
 

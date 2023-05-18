@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const flash = require('express-flash');
 const logger = require('morgan');
 const mainRoutes = require('./routes/main');
+const authRoutes = require('./routes/auth');
 
 require('dotenv').config({ path: './config/.env' });
 
@@ -61,8 +62,9 @@ app.use(flash());
 const { getFormattedCurrentDate } = require("./controllers/services/helperFunctions")
 
 app.get('/', (req, res) => {
+  console.log(req.user)
   const date = getFormattedCurrentDate()
-  res.render('index.ejs', { date, subscriptionKey, serviceRegion });
+  res.render('index.ejs', { date, subscriptionKey, serviceRegion, user: req.user });
 });
 
 // Grabs text from box
@@ -103,6 +105,7 @@ app.post('/textToSpeech', async (req, res) => {
 
 // Login, Logout, Signup Routes
 app.use('/', mainRoutes);
+app.use('/auth', authRoutes);
 
 // 404 Error Handling
 app.get('*', function (req, res) {
@@ -116,8 +119,6 @@ app.get('*', function (req, res) {
     return res.render('404');
   }
 });
-
-
 
 //Server Running
 app.listen(process.env.PORT, () => {

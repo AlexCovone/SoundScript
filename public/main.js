@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-document.querySelector('#getText').addEventListener('click', textToSpeech);
+document.querySelector('#save').addEventListener('click', textToSpeech);
 
 async function textToSpeech() {
   try {

@@ -44,12 +44,6 @@ exports.postLogin = (req, res, next) => {
   })(req, res, next);
 };
 
-exports.postDemoLogin = (req, res) => {
-  req.body.email = process.env.DEMO_EMAIL
-  req.body.password = process.env.DEMO_PASSWORD
-  exports.postLogin(req, res)
-}
-
 exports.logout = (req, res) => {
   req.logout(() => {
     console.log('User has logged out.')
@@ -64,13 +58,15 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/events");
+    return res.redirect("/");
   }
   res.render("signup", {
     title: "Create Account",
   });
 };
 
+// TODO:
+// Fix local post signup strategy
 exports.postSignup = (req, res, next) => {
   // 3 digits, hypen, 3 digits, hyphen, 4 digits
   const phone_number_pattern = /^\d{3}-\d{3}-\d{4}$/;

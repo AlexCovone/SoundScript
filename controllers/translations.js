@@ -1,0 +1,1 @@
+const Translation = require("../models/Translation");
