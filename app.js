@@ -108,17 +108,17 @@ app.use('/', mainRoutes);
 app.use('/auth', authRoutes);
 
 // 404 Error Handling
-app.get('*', function (req, res) {
-  res.status(404);
+// app.get('*', function (req, res) {
+//   res.status(404);
 
-  if (req.user) {
-    // Button redirects user to /events
-    return res.render('404', { user: req.user });
-  } else {
-    // Button redirects user to /
-    return res.render('404');
-  }
-});
+//   if (req.user) {
+//     // Button redirects user to /events
+//     return res.render('404', { user: req.user });
+//   } else {
+//     // Button redirects user to /
+//     return res.render('404');
+//   }
+// });
 
 //Server Running
 app.listen(process.env.PORT, () => {

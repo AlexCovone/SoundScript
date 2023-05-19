@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
       function (result) {
         startRecognizeOnceAsyncButton.disabled = false;
         let translation = result.translations.get(language);
-        window.console.log(translation);
         phraseDiv.innerHTML += translation;
 
         // TODO:
@@ -77,8 +76,14 @@ document.querySelector('#save').addEventListener('click', textToSpeech);
 async function textToSpeech() {
   try {
     const contentFromTextArea = document.querySelector('#phraseDiv').innerHTML;
-    console.log('textToSpeech function fired.')
-    console.log('check check check')
+
+    // TODO:
+    // Need to grab values from translated text - not just values from select/options
+    const languageTargetOptions = document.getElementById('languageTargetOptions').value;
+    const languageSourceOptions = document.getElementById('languageSourceOptions').value;
+
+    console.log(languageTargetOptions)
+    console.log(languageSourceOptions)
 
     const response = await fetch('textToSpeech', {
       method: 'POST',
@@ -89,6 +94,7 @@ async function textToSpeech() {
     });
     const data = await response.json();
     console.log(data);
+    
 
   } catch (err) {
     console.log(err);
