@@ -22,7 +22,7 @@ module.exports = {
             'ru-RU': 'Russian',
             'sv-SE': 'Swedish',
             'zh-Hans': 'Chinese'
-          };
+        };
 
         return sourceLanguageMap[languageCode]
     },
@@ -44,7 +44,7 @@ module.exports = {
             'ru': 'Russian',
             'sv': 'Swedish',
             'zh-Hans': 'Chinese'
-          };
+        };
 
         return targetLanguageMap[languageCode]
     }

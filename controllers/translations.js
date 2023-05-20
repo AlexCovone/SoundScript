@@ -13,7 +13,6 @@ module.exports = {
       console.log(err);
     }
   },
-
   saveTranslation: async (req, res) => {
     try {
       await Translation.create({
