@@ -11,9 +11,16 @@ document.addEventListener('DOMContentLoaded', function () {
   startRecognizeOnceAsyncButton = document.getElementById('startRecognizeOnceAsyncButton');
   subscriptionKey = document.getElementById('subscriptionKey');
   serviceRegion = document.getElementById('serviceRegion');
+
+  
   languageTargetOptions = document.getElementById('languageTargetOptions');
   languageSourceOptions = document.getElementById('languageSourceOptions');
   phraseDiv = document.getElementById('phraseDiv');
+
+  // Form Inputs
+  translationInput = document.getElementById('translationInput');
+  sourceLanguageInput = document.getElementById('sourceLanguageInput');
+  targetLanguageInput = document.getElementById('targetLanguageInput');
 
   startRecognizeOnceAsyncButton.addEventListener('click', function () {
     startRecognizeOnceAsyncButton.disabled = true;
@@ -39,11 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
         let translation = result.translations.get(language);
         phraseDiv.innerHTML += translation;
 
-        // TODO:
-        // if(user){ store in database }
-        console.log(`${translation} has been logged.`) // Translation
-        console.log(languageSourceOptions.value) // Source language value
-        console.log(languageTargetOptions.value) // Target language value
+        // Form Inputs for POST request
+        translationInput.value = translation;
+        sourceLanguageInput.value = languageSourceOptions.value;
+        targetLanguageInput.value = languageTargetOptions.value;
 
         recognizer.close();
         recognizer = undefined;
@@ -53,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // TODO:
         // Add alert?
         phraseDiv.innerHTML += 'Requested device not found. Please initialize microphone.';
-        console.log(err)
+        console.log(err);
         window.console.log(err);
 
         recognizer.close();
@@ -70,33 +76,3 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('warning').style.display = 'none';
   }
 });
-
-document.querySelector('#save').addEventListener('click', textToSpeech);
-
-async function textToSpeech() {
-  try {
-    const contentFromTextArea = document.querySelector('#phraseDiv').innerHTML;
-
-    // TODO:
-    // Need to grab values from translated text - not just values from select/options
-    const languageTargetOptions = document.getElementById('languageTargetOptions').value;
-    const languageSourceOptions = document.getElementById('languageSourceOptions').value;
-
-    console.log(languageTargetOptions)
-    console.log(languageSourceOptions)
-
-    const response = await fetch('textToSpeech', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sendText: contentFromTextArea,
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
-    
-
-  } catch (err) {
-    console.log(err);
-  }
-}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SoundScript - Break Down the Language Barrier</title>
+    <title>SoundScript - <%= user.displayName %></title>
     <meta charset="utf-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -111,7 +111,7 @@
             </div>
             <div class="mt-16 mx-auto max-w-7xl px-6 lg:px-8">
               <div class="mx-auto max-w-xl sm:text-center">
-                <h3 class="mt-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Alex's Translations</h3>
+                <h3 class="mt-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"><%= user.firstName %>'s Translations</h3>
               </div>
               <div
                 class="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4"
