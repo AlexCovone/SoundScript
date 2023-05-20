@@ -59,7 +59,7 @@
             <rect width="100%" height="100%" stroke-width="0" fill="url(#55d3d46d-692e-45f2-becd-d8bdc9344f45)" />
           </svg>
           <div class="relative">
-            <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-10 blur-3xl" aria-hidden="true">
+            <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-40 blur-3xl" aria-hidden="true">
               <div
                 class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#38bdf8] to-[#22d3ee]"
                 style="
@@ -109,118 +109,29 @@
                 "
               ></div>
             </div>
-            <div class="mt-16 mx-auto max-w-7xl px-6 lg:px-8">
-              <div class="mx-auto max-w-xl sm:text-center">
-                <h3 class="mt-1 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"><%= user.firstName %>'s Translations</h3>
-              </div>
-              <div
-                class="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4"
-              >
-                <figure class="col-span-2 hidden sm:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
-                  <blockquote class="p-12 text-xl font-semibold leading-8 tracking-tight text-gray-900">
-                    <p>
-                      “Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh
-                      orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.”
-                    </p>
-                  </blockquote>
-                  <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
-                    <img
-                      class="h-10 w-10 flex-none rounded-full bg-gray-50"
-                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80"
-                      alt=""
-                    />
-                    <div class="flex-auto">
-                      <div class="font-semibold">Brenna Goyette</div>
-                      <div class="">Translated from <span class="font-semibold">English</span> to <span class="font-semibold">German</span></div>
-                    </div>
-                    <img class="h-10 w-auto flex-none" src="/imgs/language.png" alt="SoundScript Logo" />
-                  </figcaption>
-                </figure>
-                <div class="space-y-8 xl:contents xl:space-y-0">
-                  <div class="space-y-8 xl:row-span-2">
-                    <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                      <blockquote class="text-gray-900">
-                        <p>“Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.”</p>
-                      </blockquote>
-                      <figcaption class="mt-6 flex items-center gap-x-4">
-                        <img
-                          class="h-10 w-10 rounded-full bg-gray-50"
-                          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
-                        <div>
-                          <div class="font-semibold">Leslie Alexander</div>
-                          <div class="text-sm">Translated from <span class="font-semibold">English</span> to <span class="font-semibold">German</span></div>
-                        </div>
-                      </figcaption>
-                    </figure>
-
-                    <!-- More testimonials... -->
-                  </div>
-                  <div class="space-y-8 xl:row-start-1">
-                    <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                      <blockquote class="text-gray-900">
-                        <p>“Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.”</p>
-                      </blockquote>
-                      <figcaption class="mt-6 flex items-center gap-x-4">
-                        <img
-                          class="h-10 w-10 rounded-full bg-gray-50"
-                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
-                        <div>
-                          <div class="font-semibold">Lindsay Walton</div>
-                          <div class="">Translated from <span class="font-semibold">English</span> to <span class="font-semibold">German</span></div>
-                        </div>
-                      </figcaption>
-                    </figure>
-
-                    <!-- More testimonials... -->
-                  </div>
+            <div class="mt-16">
+              <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                <div class="mx-auto max-w-xl text-center">
+                  <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"><%= user.firstName %>'s Translations</p>
                 </div>
-                <div class="space-y-8 xl:contents xl:space-y-0">
-                  <div class="space-y-8 xl:row-start-1">
-                    <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                      <blockquote class="text-gray-900">
-                        <p>
-                          “Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe
-                          corrupti.”
-                        </p>
-                      </blockquote>
-                      <figcaption class="mt-6 flex items-center gap-x-4">
-                        <img
-                          class="h-10 w-10 rounded-full bg-gray-50"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
-                        <div>
-                          <div class="font-semibold">Tom Cook</div>
-                          <div class="">Translated from <span class="font-semibold">English</span> to <span class="font-semibold">German</span></div>
-                        </div>
-                      </figcaption>
-                    </figure>
-
-                    <!-- More testimonials... -->
-                  </div>
-                  <div class="space-y-8 xl:row-span-2">
-                    <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                      <blockquote class="text-gray-900">
-                        <p>“Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.”</p>
-                      </blockquote>
-                      <figcaption class="mt-6 flex items-center gap-x-4">
-                        <img
-                          class="h-10 w-10 rounded-full bg-gray-50"
-                          src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                        />
-                        <div>
-                          <div class="font-semibold">Leonard Krasner</div>
-                          <div class="">Translated from <span class="font-semibold">English</span> to <span class="font-semibold">German</span></div>
-                        </div>
-                      </figcaption>
-                    </figure>
-
-                    <!-- More testimonials... -->
+                <div class="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
+                  <div class="-mt-8 sm:-mx-4 md:columns-2 sm:text-[0] lg:columns-3">
+                    <% for(let i = 0; i < translations.length; i++) {%>
+                    <div class="pt-8 sm:inline-block sm:w-full sm:px-4">
+                      <figure class="rounded-2xl backdrop-blur-sm bg-white/30 p-8 text-sm leading-6 ring-1 ring-gray-500 hover:bg-white sm:shadow-md">
+                        <blockquote class="text-gray-900 text-lg">
+                          <p>“<%= translations[i].translation %>”</p>
+                        </blockquote>
+                        <figcaption class="mt-6 flex items-center gap-x-4">
+                          <img class="h-10 w-10 rounded-full bg-gray-50" src="<%= user.image %>" alt="">
+                          <div>
+                            <div class="font-semibold text-gray-900"><%= translations[i].formattedDate %></div>
+                            <div class="">Translated from <span class="font-semibold"><%= translations[i].sourceLanguage %> </span> to <span class="font-semibold"><%= translations[i].targetLanguage %></span></div>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <% } %>
                   </div>
                 </div>
               </div>

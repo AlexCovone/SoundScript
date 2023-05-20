@@ -1,4 +1,6 @@
 const Translation = require('../models/Translation');
+const { getFormattedCurrentDate } = require('../controllers/services/helperFunctions');
+
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -7,11 +9,12 @@ module.exports = {
 
       console.log(translations)
 
-      res.render('userHistory.ejs', {user: req.user });
+      res.render('userHistory.ejs', {translations, user: req.user });
     } catch (err) {
       console.log(err);
     }
   },
+  
   saveTranslation: async (req, res) => {
     try {
       const sourceLanguageMap = {
@@ -29,7 +32,7 @@ module.exports = {
         'pt-BR' : 'Portugese',
         'ru-RU' : 'Russian',
         'sv-SE' : 'Swedish',
-        'zh-Hans' : 'Chinese - Simplified'
+        'zh-Hans' : 'Chinese'
       }
 
       const targetLanguageMap = {
@@ -47,19 +50,17 @@ module.exports = {
         'pt' : 'Portugese',
         'ru' : 'Russian',
         'sv' : 'Swedish',
-        'zh-Hans' : 'Chinese - Simplified'
+        'zh-Hans' : 'Chinese'
       }
 
-      console.log(sourceLanguageMap[req.body.sourceLanguage])
-      console.log(targetLanguageMap[req.body.targetLanguage])
-      
       await Translation.create({
         translation: req.body.translation,
         sourceLanguage: sourceLanguageMap[req.body.sourceLanguage],
         targetLanguage: targetLanguageMap[req.body.targetLanguage],
+        formattedDate: getFormattedCurrentDate(),
         user: req.user.id,
       });
-      console.log('Trasnlation has been saved!');
+      console.log(`Translation has been saved for ${req.user.displayName}!`);
       res.redirect('/');
     } catch (err) {
       console.log(err);

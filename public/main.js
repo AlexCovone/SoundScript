@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
   subscriptionKey = document.getElementById('subscriptionKey');
   serviceRegion = document.getElementById('serviceRegion');
 
-  
   languageTargetOptions = document.getElementById('languageTargetOptions');
   languageSourceOptions = document.getElementById('languageSourceOptions');
   phraseDiv = document.getElementById('phraseDiv');

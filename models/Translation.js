@@ -14,6 +14,9 @@ const TranslationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  formattedDate: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

@@ -219,7 +219,7 @@
                   <img class="h-10 w-10 flex-none rounded-full bg-gray-50" src="<%= user.image %>" alt="Profile Picture" />
                   <div class="flex-auto">
                     <div class="font-semibold"><%= user.displayName %></div>
-                    <div class=""><%= date %></div>
+                    <div><%= date %></div>
                   </div>
 
                   <form action="/saveTranslation" method="POST">
@@ -245,16 +245,14 @@
                     </button>
                   </form>
                 </figcaption>
+                <% } else { %>
+                  <div class="hidden">
+                    <input type="text" id="translationInput" />
+                    <input type="text" id="sourceLanguageInput" />
+                    <input type="text" id="targetLanguageInput" />
+                  </div>
                 <% } %>
               </figure>
-
-
-              <!-- <button
-                id="getText"
-                class="ml-1 mt-8 rounded-md bg-blue-500 px-3.5 py-2.5 pl-3 text-sm font-semibold text-white shadow-sm hover:bg-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Text to speech
-              </button> -->
             </div>
             <div class="mt-16 xs:hidden sm:mt-24 lg:mt-0 lg:block lg:flex-shrink-0 lg:flex-grow xl:pl-24">
               <svg viewBox="0 0 366 729" role="img" class="mx-auto w-[22.875rem] max-w-full drop-shadow-xl">
