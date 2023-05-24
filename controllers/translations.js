@@ -15,6 +15,13 @@ module.exports = {
   },
   saveTranslation: async (req, res) => {
     try {
+      const { translation, sourceLanguage, targetLanguage } = req.body;
+
+      if (!translation || !sourceLanguage || !targetLanguage) {
+        req.flash('error', 'Oops! Please record what you would like translated to save it.');
+        return res.redirect('/');
+      }
+
       await Translation.create({
         translation: req.body.translation,
         sourceLanguage: mapSourceLanguage(req.body.sourceLanguage),
@@ -22,6 +29,7 @@ module.exports = {
         formattedDate: getFormattedCurrentDate(),
         user: req.user.id,
       });
+      req.flash("success", `Translation Saved!`)
       console.log(`Translation has been saved for ${req.user.displayName}!`);
       res.redirect('/');
     } catch (err) {

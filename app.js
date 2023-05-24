@@ -61,9 +61,15 @@ app.use(flash());
 const { getFormattedCurrentDate } = require('./controllers/services/helperFunctions');
 
 app.get('/', (req, res) => {
-  console.log(req.user);
   const date = getFormattedCurrentDate();
-  res.render('index.ejs', { date, subscriptionKey, serviceRegion, user: req.user });
+  const message = {
+    error: req.flash('error'),
+    success: req.flash('success')
+  }
+
+  console.log(message)
+
+  res.render('index.ejs', { date, subscriptionKey, serviceRegion, message, user: req.user });
 });
 
 // Login, Logout, Signup Routes
