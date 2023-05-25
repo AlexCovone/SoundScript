@@ -1,14 +1,15 @@
 const Translation = require('../models/Translation');
-const { getFormattedCurrentDate, mapSourceLanguage, mapTargetLanguage } = require('../controllers/services/helperFunctions');
+const { getFormattedCurrentDate, getCurrentYear, mapSourceLanguage, mapTargetLanguage } = require('../controllers/services/helperFunctions');
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
       const translations = await Translation.find({ user: req.user.id }).sort({ createdAt: 'desc' });
+      const year = getCurrentYear();
 
       console.log(translations);
 
-      res.render('userHistory.ejs', { translations, user: req.user });
+      res.render('userHistory.ejs', { currentYear: year, translations, user: req.user });
     } catch (err) {
       console.log(err);
     }

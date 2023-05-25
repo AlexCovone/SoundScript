@@ -1,13 +1,18 @@
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
+const { getCurrentYear } = require('../controllers/services/helperFunctions');
 
 exports.getLogin = (req, res) => {
+  const year = getCurrentYear(); // Assuming you have a function called getCurrentYear() to retrieve the current year
+
   if (req.user) {
     return res.redirect("/");
   }
+
   res.render("login", {
     title: "Login",
+    currentYear: year, // Pass the current year as a variable to the view
   });
 };
 
@@ -57,14 +62,17 @@ exports.logout = (req, res) => {
 };
 
 exports.getSignup = (req, res) => {
+  const year = getCurrentYear(); 
+
   if (req.user) {
     return res.redirect("/");
   }
+
   res.render("signup", {
     title: "Create Account",
+    currentYear: year, 
   });
 };
-
 // TODO:
 // Fix local post signup strategy
 exports.postSignup = (req, res, next) => {

@@ -58,10 +58,11 @@ app.use(passport.session());
 app.use(flash());
 
 // Landing Page Route
-const { getFormattedCurrentDate } = require('./controllers/services/helperFunctions');
+const { getFormattedCurrentDate, getCurrentYear } = require('./controllers/services/helperFunctions');
 
 app.get('/', (req, res) => {
   const date = getFormattedCurrentDate();
+  const year = getCurrentYear();
   const message = {
     error: req.flash('error'),
     success: req.flash('success')
@@ -69,7 +70,7 @@ app.get('/', (req, res) => {
 
   console.log(message)
 
-  res.render('index.ejs', { date, subscriptionKey, serviceRegion, message, user: req.user });
+  res.render('index.ejs', { date, currentYear: year, subscriptionKey, serviceRegion, message, user: req.user });
 });
 
 // Login, Logout, Signup Routes

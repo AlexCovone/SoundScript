@@ -5,6 +5,10 @@ module.exports = {
         return date.toLocaleDateString('en-US', format)        
     },
 
+    getCurrentYear: () => {
+        return new Date().getFullYear()
+    },
+
     mapSourceLanguage: (languageCode) => {
         const sourceLanguageMap = {
             'en-US': 'English',
