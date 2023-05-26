@@ -18,6 +18,7 @@ require('./config/passport')(passport);
 
 //Connect To Database
 connectDB();
+let db = mongoose.connection
 
 // pull in the required packages.
 const sdk = require('microsoft-cognitiveservices-speech-sdk');
@@ -59,18 +60,22 @@ app.use(flash());
 
 // Landing Page Route
 const { getFormattedCurrentDate, getCurrentYear } = require('./controllers/services/helperFunctions');
+// const Translation = require('./models/Translation');
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   const date = getFormattedCurrentDate();
   const year = getCurrentYear();
   const message = {
     error: req.flash('error'),
-    success: req.flash('success')
-  }
+    success: req.flash('success'),
+  };
+  console.log(message);
 
-  console.log(message)
+  // Select 7 random documents in Translation collection
+  const sampleCollection = db.collection('sampleTranslations');
+  const translations = await sampleCollection.aggregate([{ $sample: { size: 7 } }]).toArray();
 
-  res.render('index.ejs', { date, currentYear: year, subscriptionKey, serviceRegion, message, user: req.user });
+  res.render('index.ejs', { date, currentYear: year, subscriptionKey, serviceRegion, message, translations, user: req.user });
 });
 
 // Login, Logout, Signup Routes
