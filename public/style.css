@@ -1458,16 +1458,12 @@ html {
   margin-top: 1.5rem;
 }
 
-.mt-8 {
-  margin-top: 2rem;
-}
-
-.mt-5 {
-  margin-top: 1.25rem;
-}
-
 .mt-7 {
   margin-top: 1.75rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
 }
 
 .block {
@@ -1974,11 +1970,6 @@ html {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
 }
 
 .font-bold {
@@ -2511,11 +2502,6 @@ html {
   .sm\:text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
-  }
-
-  .sm\:text-5xl {
-    font-size: 3rem;
-    line-height: 1;
   }
 
   .sm\:leading-6 {
