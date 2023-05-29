@@ -1,10 +1,10 @@
+const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 // Google Oauth Strategy Schema
 const UserSchema = new mongoose.Schema({
   googleId: {
     type: String,
-    required: true
   },
   displayName: {
     type: String,

@@ -4,7 +4,7 @@ const User = require("../models/User");
 const { getCurrentYear } = require('../controllers/services/helperFunctions');
 
 exports.getLogin = (req, res) => {
-  const year = getCurrentYear(); // Assuming you have a function called getCurrentYear() to retrieve the current year
+  const year = getCurrentYear();
 
   if (req.user) {
     return res.redirect("/");
@@ -12,7 +12,7 @@ exports.getLogin = (req, res) => {
 
   res.render("login", {
     title: "Login",
-    currentYear: year, // Pass the current year as a variable to the view
+    currentYear: year, 
   });
 };
 
@@ -73,11 +73,13 @@ exports.getSignup = (req, res) => {
     currentYear: year, 
   });
 };
+
 // TODO:
 // Fix local post signup strategy
 exports.postSignup = (req, res, next) => {
-  // 3 digits, hypen, 3 digits, hyphen, 4 digits
-  const phone_number_pattern = /^\d{3}-\d{3}-\d{4}$/;
+
+  console.log(req.body)
+
   const validationErrors = [];
   
   if (!validator.isEmail(req.body.email))
@@ -88,10 +90,6 @@ exports.postSignup = (req, res, next) => {
     });
   if (req.body.password !== req.body.confirmPassword)
     validationErrors.push({ msg: "Passwords do not match." });
-  
-  // Test method returns boolean value if string matches regular expression.
-  if (req.body.phoneNumber && !phone_number_pattern.test(req.body.phoneNumber))
-    validationErrors.push({ msg: "Please enter a valid phone number." });
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
@@ -105,12 +103,7 @@ exports.postSignup = (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    phoneNumber: req.body.phoneNumber,
-    occupation: req.body.occupation
   });
-
-  // req.body.occupation takes the checkbox name values from signup.ejs
-  console.log(req.body.occupation)
 
   User.findOne(
     { $or: [{ email: req.body.email }, { name: req.body.name }] },
@@ -132,7 +125,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.redirect("/events");
+          res.redirect("/");
         });
       });
     }
