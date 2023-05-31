@@ -27,7 +27,6 @@ const path = require('path');
 
 const subscriptionKey = process.env.MS_KEY;
 const serviceRegion = process.env.MS_REGION;
-const filename = 'YourAudioFile.wav';
 
 //Server Setup
 app.set('view engine', 'ejs');
