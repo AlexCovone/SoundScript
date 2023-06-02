@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SoundScript - <%= user.displayName %></title>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/png" sizes="32x32" href="/imgs/languages32x32.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="body bg-white text-lg">
+    <div class="bg-white">
+      <!-- Header -->
+      <header class="absolute inset-x-0 top-0 z-50">
+        <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+          <div class="flex lg:flex-1">
+            <a href="/" class="-m-1.5 p-1.5">
+              <span class="sr-only">SoundScript</span>
+              <div class="btn-ghost btn flex">
+                <img class="h-8 w-auto" src="/imgs/language.png" alt="SoundScript SVG" />
+                <span class="ml-3 font-bold tracking-wide xs:text-xl md:text-2xl">SoundScript</span>
+              </div>
+            </a>
+          </div>
+          <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <% if (!user) { %>
+            <a href="/login" class="btn-ghost btn text-sm font-semibold leading-6 text-slate-950"
+              >Login
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <% } else { %>
+            <a href="/" class="btn-ghost btn mr-3 text-sm font-semibold leading-6 text-slate-950">Translate</a>
+            <a href="/logout" class="btn-ghost btn text-sm font-semibold leading-6 text-slate-950"
+              >Logout
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <% } %>
+          </div>
+        </nav>
+      </header>
+    </div>
+  </body>
+</html>

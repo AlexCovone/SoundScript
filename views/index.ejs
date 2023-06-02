@@ -1,607 +1,516 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>SoundScript - Break Down the Language Barrier</title>
-    <meta charset="utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="icon" type="image/png" sizes="32x32" href="/imgs/languages32x32.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body class="body bg-white text-lg">
-    <!-- Header -->
-    <header class="absolute inset-x-0 top-0 z-50">
-      <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div class="flex lg:flex-1">
-          <a href="/" class="-m-1.5 p-1.5">
-            <span class="sr-only">SoundScript</span>
-            <div class="btn-ghost btn flex">
-              <img class="h-8 w-auto" src="/imgs/language.png" alt="SoundScript SVG"/>
-              <span class="ml-3 font-bold tracking-wide xs:text-xl md:text-2xl">SoundScript</span>
-            </div>
-          </a>
-        </div>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <% if (!user) { %>
-          <a href="/login" class="btn-ghost btn text-sm font-semibold leading-6 text-slate-950"
-            >Login
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </a>
-          <% } else { %>
-          <a href="/profile" class="btn-ghost btn mr-3 text-sm font-semibold leading-6 text-slate-950">History</a>
-          <a href="/logout" class="btn-ghost btn text-sm font-semibold leading-6 text-slate-950"
-            >Logout
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </a>
-          <% } %>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <div class="toast-end toast z-50">
-        <% if (message.error[0]) { %>
-        <div class="notification duration-2000 alert alert-error bg-[#f5c358] shadow-lg transition-opacity" id="error-toast">
-          <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFD700" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-              />
-            </svg>
-
-            <span class="font-semibold sm:text-xs md:text-lg"><%= message.error %></span>
-          </div>
-        </div>
-        <% } else if(message.success[0]) { %>
-        <div class="notification duration-2000 alert alert-success bg-[#a7fa9b] shadow-lg transition-opacity" id="success-toast">
-          <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-
-            <span class="font-semibold sm:text-xs md:text-lg"><%= message.success %></span>
-          </div>
-        </div>
-        <% } %>
-      </div>
-
-      <!-- Hero section -->
-      <div class="relative isolate sm:pt-14">
-        <svg class="absolute inset-0 -z-10 hidden h-full w-full stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] sm:block" aria-hidden="true">
-          <defs>
-            <pattern id="55d3d46d-692e-45f2-becd-d8bdc9344f45" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
-              <path d="M.5 200V.5H200" fill="none" />
-            </pattern>
-          </defs>
-          <svg x="50%" y="0" class="overflow-visible fill-gray-50">
-            <path d="M-200.5 0h201v201h-201Z M599.5 0h201v201h-201Z M399.5 400h201v201h-201Z M-400.5 600h201v201h-201Z" stroke-width="0" />
-          </svg>
-          <rect width="100%" height="100%" stroke-width="0" fill="url(#55d3d46d-692e-45f2-becd-d8bdc9344f45)" />
+<%- include('partials/header') -%>
+<main>
+  <div class="toast-end toast z-50">
+    <% if (message.error[0]) { %>
+    <div class="notification duration-2000 alert alert-error bg-[#f5c358] shadow-lg transition-opacity" id="error-toast">
+      <div class="flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#FFD700" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+          />
         </svg>
-        <div class="relative">
-          <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl" aria-hidden="true">
-            <div
-              class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#38bdf8] to-[#22d3ee]"
-              style="
-                clip-path: polygon(
-                  74.1% 44.1%,
-                  100% 61.6%,
-                  97.5% 26.9%,
-                  85.5% 0.1%,
-                  80.7% 2%,
-                  72.5% 32.5%,
-                  60.2% 62.4%,
-                  52.4% 68.1%,
-                  47.5% 58.3%,
-                  45.2% 34.5%,
-                  27.5% 76.7%,
-                  0.1% 64.9%,
-                  17.9% 100%,
-                  27.6% 76.8%,
-                  76.1% 97.7%,
-                  74.1% 44.1%
-                );
-              "
-            ></div>
-          </div>
-          <div class="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-8 opacity-25 blur-3xl xl:justify-end" aria-hidden="true">
-            <div
-              class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-[#bae6fd] to-[#a5f3fc] xl:ml-0 xl:mr-[calc(50%-12rem)]"
-              style="
-                clip-path: polygon(
-                  74.1% 44.1%,
-                  100% 61.6%,
-                  97.5% 26.9%,
-                  85.5% 0.1%,
-                  80.7% 2%,
-                  72.5% 32.5%,
-                  60.2% 62.4%,
-                  52.4% 68.1%,
-                  47.5% 58.3%,
-                  45.2% 34.5%,
-                  27.5% 76.7%,
-                  0.1% 64.9%,
-                  17.9% 100%,
-                  27.6% 76.8%,
-                  76.1% 97.7%,
-                  74.1% 44.1%
-                );
-              "
-            ></div>
-          </div>
-        </div>
-        <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
-          <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-            <div class="flex">
-              <div class="relative flex items-center gap-x-4 rounded-full px-4 py-1 text-sm leading-6 text-gray-600 ring-1 ring-slate-900/10">
-                <span class="flex items-center gap-x-1 font-semibold">
-                  <span class="font-semibold text-slate-950">Developed for Be the Change Generation CIC</span>
-                </span>
-              </div>
-            </div>
-            <h1 class="mt-10 max-w-lg text-4xl font-bold tracking-tighter text-gray-900 sm:text-6xl">
-              Translate <span class="bg-gradient-to-tr from-blue-300 to-cyan-300 bg-clip-text pr-2 text-transparent">Instantly </span>
-            </h1>
-            <p class="mt-6 text-lg leading-8 text-gray-600">
-              Your ultimate language companion. Break down the language barrier instantly. Speak directly into your device and witness translations up to 15 languages!
-            </p>
-            <div class="mt-6 flex items-center gap-x-6">
-              <div>
-                <label for="languageSourceOptions" class="block text-sm font-medium leading-6 text-gray-900">Source Language</label>
-                <select
-                  id="languageSourceOptions"
-                  name="location"
-                  class="mt-2 block w-full rounded-md border-0 py-2.5 pl-3 pr-10 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-sky-300 sm:text-sm sm:leading-6"
-                >
-                  <option value="ar-EG">Arabic</option>
-                  <option value="de-DE">German</option>
-                  <option selected="selected" value="en-US">English</option>
-                  <option value="es-ES">Spanish</option>
-                  <option value="fi-FI">Finnish</option>
-                  <option value="fr-FR">French</option>
-                  <option value="hi-IN">Hindi</option>
-                  <option value="it-IT">Italian</option>
-                  <option value="ja-JP">Japanese</option>
-                  <option value="ko-KR">Korean</option>
-                  <option value="pl-PL">Polish</option>
-                  <option value="pt-BR">Portuguese</option>
-                  <option value="ru-RU">Russian</option>
-                  <option value="sv-SE">Swedish</option>
-                  <option value="zh-Hans">Chinese</option>
-                </select>
-              </div>
 
-              <div>
-                <label for="languageTargetOptions" class="block text-sm font-medium leading-6 text-gray-900">Target Language</label>
-                <select
-                  id="languageTargetOptions"
-                  name="location"
-                  class="mt-2 block w-full rounded-md border-0 py-2.5 pl-3 pr-10 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-sky-300 sm:text-sm sm:leading-6"
-                >
-                  <option value="ar">Arabic</option>
-                  <option selected="selected" value="de">German</option>
-                  <option value="en">English</option>
-                  <option value="es">Spanish</option>
-                  <option value="fi">Finnish</option>
-                  <option value="fr">French</option>
-                  <option value="hi">Hindi</option>
-                  <option value="it">Italian</option>
-                  <option value="ja">Japanese</option>
-                  <option value="ko">Korean</option>
-                  <option value="pl">Polish</option>
-                  <option value="pt">Portuguese</option>
-                  <option value="ru">Russian</option>
-                  <option value="sv">Swedish</option>
-                  <option value="zh-Hans">Chinese</option>
-                </select>
-              </div>
-
-              <button
-                id="startRecognizeOnceAsyncButton"
-                class="ml-1 mt-8 rounded-md bg-blue-600 px-3.5 py-2.5 pl-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
-              >
-                <span class="flex items-center">
-                  <span class="mr-1">Translate</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </div>
-            <table class="hidden">
-              <tr class="hidden">
-                <td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>
-                <td><input id="subscriptionKey" type="password" size="40" value="<%= subscriptionKey %>" /></td>
-              </tr>
-              <tr class="hidden">
-                <td align="right">Region</td>
-                <td><input id="serviceRegion" type="text" size="40" value="<%= serviceRegion %>" /></td>
-              </tr>
-            </table>
-
-            <!-- Translation Display -->
-            <!-- If user is logged in, render -->
-
-            <figure class="col-span-2 mt-16 hidden xs:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
-              <blockquote class="p-12 text-xl leading-8 tracking-tight text-gray-900">
-                <p id="phraseDiv">
-                  “Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci
-                  mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.”
-                </p>
-              </blockquote>
-              <% if (user) { %>
-              <!-- Name, translate from, img -->
-              <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
-                <img class="h-10 w-10 flex-none rounded-full bg-gray-50" src="<%= user.image %>" alt="Profile Picture" />
-                <div class="flex-auto">
-                  <div class="font-semibold"><%= user.displayName %></div>
-                  <div><%= date %></div>
-                </div>
-
-                <form action="/saveTranslation" method="POST">
-                  <div class="form-control mb-2 hidden">
-                    <label for="translation" class="form-label mb-2">Translation</label>
-                    <input type="text" id="translationInput" class="form-control" aria-describedby="translation" name="translation" />
-
-                    <label for="sourceLanguage" class="form-label mb-2">Source Language</label>
-                    <input type="text" id="sourceLanguageInput" class="form-control" aria-describedby="sourceLanguage" name="sourceLanguage" />
-
-                    <label for="targetLanguage" class="form-label mb-2">Target Language</label>
-                    <input type="text" id="targetLanguageInput" class="form-control" aria-describedby="targetLanguage" name="targetLanguage" />
-                  </div>
-
-                  <button id="submit" class="btn-ghost btn block">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                      />
-                    </svg>
-                  </button>
-                </form>
-              </figcaption>
-              <% } else { %>
-              <div class="hidden">
-                <input type="text" id="translationInput" />
-                <input type="text" id="sourceLanguageInput" />
-                <input type="text" id="targetLanguageInput" />
-              </div>
-              <% } %>
-            </figure>
-          </div>
-          <div class="mt-16 xs:hidden sm:mt-24 lg:mt-0 lg:block lg:flex-shrink-0 lg:flex-grow xl:pl-24">
-            <svg viewBox="0 0 366 729" role="img" class="mx-auto w-[22.875rem] max-w-full drop-shadow-xl">
-              <title>Text Conversation with Translation</title>
-              <defs>
-                <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
-                  <rect width="316" height="684" rx="36" />
-                </clipPath>
-              </defs>
-              <path
-                fill="#4B5563"
-                d="M363.315 64.213C363.315 22.99 341.312 1 300.092 1H66.751C25.53 1 3.528 22.99 3.528 64.213v44.68l-.857.143A2 2 0 0 0 1 111.009v24.611a2 2 0 0 0 1.671 1.973l.95.158a2.26 2.26 0 0 1-.093.236v26.173c.212.1.398.296.541.643l-1.398.233A2 2 0 0 0 1 167.009v47.611a2 2 0 0 0 1.671 1.973l1.368.228c-.139.319-.314.533-.511.653v16.637c.221.104.414.313.56.689l-1.417.236A2 2 0 0 0 1 237.009v47.611a2 2 0 0 0 1.671 1.973l1.347.225c-.135.294-.302.493-.49.607v377.681c0 41.213 22 63.208 63.223 63.208h95.074c.947-.504 2.717-.843 4.745-.843l.141.001h.194l.086-.001 33.704.005c1.849.043 3.442.37 4.323.838h95.074c41.222 0 63.223-21.999 63.223-63.212v-394.63c-.259-.275-.48-.796-.63-1.47l-.011-.133 1.655-.276A2 2 0 0 0 366 266.62v-77.611a2 2 0 0 0-1.671-1.973l-1.712-.285c.148-.839.396-1.491.698-1.811V64.213Z"
-              />
-              <path fill="#343E4E" d="M16 59c0-23.748 19.252-43 43-43h246c23.748 0 43 19.252 43 43v615c0 23.196-18.804 42-42 42H58c-23.196 0-42-18.804-42-42V59Z" />
-              <foreignObject width="316" height="684" transform="translate(24 24)" clip-path="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)">
-                <img src="/imgs/Text.gif" alt="Text Conversation Gif" />
-              </foreignObject>
-            </svg>
-          </div>
-        </div>
+        <span class="font-semibold sm:text-xs md:text-lg"><%= message.error %></span>
       </div>
-      <div id="content" style="display: none"></div>
-      <div id="warning"></div>
+    </div>
+    <% } else if(message.success[0]) { %>
+    <div class="notification duration-2000 alert alert-success bg-[#a7fa9b] shadow-lg transition-opacity" id="success-toast">
+      <div class="flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
 
-      <!-- Flag Carousel -->
-      <div class="slideshow-container mx-auto max-w-7xl px-6 lg:px-8">
+        <span class="font-semibold sm:text-xs md:text-lg"><%= message.success %></span>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+  <!-- Hero section -->
+  <div class="relative isolate sm:pt-14">
+    <svg class="absolute inset-0 -z-10 hidden h-full w-full stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] sm:block" aria-hidden="true">
+      <defs>
+        <pattern id="55d3d46d-692e-45f2-becd-d8bdc9344f45" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
+          <path d="M.5 200V.5H200" fill="none" />
+        </pattern>
+      </defs>
+      <svg x="50%" y="0" class="overflow-visible fill-gray-50">
+        <path d="M-200.5 0h201v201h-201Z M599.5 0h201v201h-201Z M399.5 400h201v201h-201Z M-400.5 600h201v201h-201Z" stroke-width="0" />
+      </svg>
+      <rect width="100%" height="100%" stroke-width="0" fill="url(#55d3d46d-692e-45f2-becd-d8bdc9344f45)" />
+    </svg>
+    <div class="relative">
+      <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl" aria-hidden="true">
         <div
-          class="slideshow mx-auto grid max-w-lg grid-cols-4 items-center gap-y-12 xs:gap-x-20 sm:max-w-xl sm:grid-cols-6 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5 lg:gap-x-20"
-        >
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/usa.png" alt="USA Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/germany.png" alt="Germany Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/spain.png" alt="Spain Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/france.png" alt="France Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/italy.png" alt="Italy Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/japan.png" alt="Japan Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/south-korea.png" alt="South Korea Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/sweden.png" alt="Sweden Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/finland.png" alt="Finland Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/india.png" alt="India Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/russia.png" alt="Russia Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/mexico.png" alt="Mexico Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/brazil.png" alt="Brazil Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/china.png" alt="China Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/poland.png" alt="Poland Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/portugal.png" alt="Portugal Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/usa.png" alt="USA Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/germany.png" alt="Germany Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/spain.png" alt="Spain Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/france.png" alt="France Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/italy.png" alt="Italy Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/japan.png" alt="Japan Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/south-korea.png" alt="South Korea Flag" width="158" height="48" />
-          <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/sweden.png" alt="Sweden Flag" width="158" height="48" />
-        </div>
+          class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#38bdf8] to-[#22d3ee]"
+          style="
+            clip-path: polygon(
+              74.1% 44.1%,
+              100% 61.6%,
+              97.5% 26.9%,
+              85.5% 0.1%,
+              80.7% 2%,
+              72.5% 32.5%,
+              60.2% 62.4%,
+              52.4% 68.1%,
+              47.5% 58.3%,
+              45.2% 34.5%,
+              27.5% 76.7%,
+              0.1% 64.9%,
+              17.9% 100%,
+              27.6% 76.8%,
+              76.1% 97.7%,
+              74.1% 44.1%
+            );
+          "
+        ></div>
       </div>
-
-      <!-- Testimonials section -->
-      <div class="relative isolate mt-28 sm:mt-40 sm:pt-16">
-        <svg class="absolute inset-0 -z-10 hidden h-full w-full stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] sm:block" aria-hidden="true">
-          <defs>
-            <pattern id="55d3d46d-692e-45f2-becd-d8bdc9344f45" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
-              <path d="M.5 200V.5H200" fill="none" />
-            </pattern>
-          </defs>
-          <svg x="50%" y="0" class="overflow-visible fill-gray-50">
-            <path d="M-200.5 0h201v201h-201Z M599.5 0h201v201h-201Z M399.5 400h201v201h-201Z M-400.5 600h201v201h-201Z" stroke-width="0" />
-          </svg>
-          <rect width="100%" height="100%" stroke-width="0" fill="url(#55d3d46d-692e-45f2-becd-d8bdc9344f45)" />
-        </svg>
-        <div class="relative">
-          <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-20 blur-3xl" aria-hidden="true">
-            <div
-              class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#38bdf8] to-[#22d3ee]"
-              style="
-                clip-path: polygon(
-                  74.1% 44.1%,
-                  100% 61.6%,
-                  97.5% 26.9%,
-                  85.5% 0.1%,
-                  80.7% 2%,
-                  72.5% 32.5%,
-                  60.2% 62.4%,
-                  52.4% 68.1%,
-                  47.5% 58.3%,
-                  45.2% 34.5%,
-                  27.5% 76.7%,
-                  0.1% 64.9%,
-                  17.9% 100%,
-                  27.6% 76.8%,
-                  76.1% 97.7%,
-                  74.1% 44.1%
-                );
-              "
-            ></div>
+      <div class="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-8 opacity-25 blur-3xl xl:justify-end" aria-hidden="true">
+        <div
+          class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-[#bae6fd] to-[#a5f3fc] xl:ml-0 xl:mr-[calc(50%-12rem)]"
+          style="
+            clip-path: polygon(
+              74.1% 44.1%,
+              100% 61.6%,
+              97.5% 26.9%,
+              85.5% 0.1%,
+              80.7% 2%,
+              72.5% 32.5%,
+              60.2% 62.4%,
+              52.4% 68.1%,
+              47.5% 58.3%,
+              45.2% 34.5%,
+              27.5% 76.7%,
+              0.1% 64.9%,
+              17.9% 100%,
+              27.6% 76.8%,
+              76.1% 97.7%,
+              74.1% 44.1%
+            );
+          "
+        ></div>
+      </div>
+    </div>
+    <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
+      <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
+        <div class="flex">
+          <div class="relative flex items-center gap-x-4 rounded-full px-4 py-1 text-sm leading-6 text-gray-600 ring-1 ring-slate-900/10">
+            <span class="flex items-center gap-x-1 font-semibold">
+              <span class="font-semibold text-slate-950">Developed for Be the Change Generation CIC</span>
+            </span>
           </div>
-          <div class="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-8 opacity-30 blur-2xl xl:justify-end" aria-hidden="true">
-            <div
-              class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[20deg] bg-gradient-to-tr from-[#bae6fd] to-[#a5f3fc] xl:ml-0 xl:mr-[calc(50%-12rem)]"
-              style="
-                clip-path: polygon(
-                  74.1% 44.1%,
-                  100% 61.6%,
-                  97.5% 26.9%,
-                  85.5% 0.1%,
-                  80.7% 2%,
-                  72.5% 32.5%,
-                  60.2% 62.4%,
-                  52.4% 68.1%,
-                  47.5% 58.3%,
-                  45.2% 34.5%,
-                  27.5% 76.7%,
-                  0.1% 64.9%,
-                  17.9% 100%,
-                  27.6% 76.8%,
-                  76.1% 97.7%,
-                  74.1% 44.1%
-                );
-              "
-            ></div>
-          </div>
-          <div class="mx-auto max-w-7xl lg:py-10 px-6 lg:px-8">
-            <div class="mx-auto max-w-xl sm:text-center">
-              <h3 class="mt-1 text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">Recent Translations</h3>
-            </div>
-            <div
-              class="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4"
+        </div>
+        <h1 class="mt-10 max-w-lg text-4xl font-bold tracking-tighter text-gray-900 sm:text-6xl">
+          Translate <span class="bg-gradient-to-tr from-blue-300 to-cyan-300 bg-clip-text pr-2 text-transparent">Instantly </span>
+        </h1>
+        <p class="mt-6 text-lg leading-8 text-gray-600">
+          Your ultimate language companion. Break down the language barrier instantly. Speak directly into your device and witness translations up to 15 languages!
+        </p>
+        <div class="mt-6 flex items-center gap-x-6">
+          <div>
+            <label for="languageSourceOptions" class="block text-sm font-medium leading-6 text-gray-900">Source Language</label>
+            <select
+              id="languageSourceOptions"
+              name="location"
+              class="mt-2 block w-full rounded-md border-0 py-2.5 pl-3 pr-10 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-sky-300 sm:text-sm sm:leading-6"
             >
-              <figure class="col-span-2 hidden sm:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
-                <blockquote class="p-12 text-2xl font-semibold leading-8 tracking-tight text-gray-900">
-                  <p><%=translations[0].translation %></p>
+              <option value="ar-EG">Arabic</option>
+              <option value="de-DE">German</option>
+              <option selected="selected" value="en-US">English</option>
+              <option value="es-ES">Spanish</option>
+              <option value="fi-FI">Finnish</option>
+              <option value="fr-FR">French</option>
+              <option value="hi-IN">Hindi</option>
+              <option value="it-IT">Italian</option>
+              <option value="ja-JP">Japanese</option>
+              <option value="ko-KR">Korean</option>
+              <option value="pl-PL">Polish</option>
+              <option value="pt-BR">Portuguese</option>
+              <option value="ru-RU">Russian</option>
+              <option value="sv-SE">Swedish</option>
+              <option value="zh-Hans">Chinese</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="languageTargetOptions" class="block text-sm font-medium leading-6 text-gray-900">Target Language</label>
+            <select
+              id="languageTargetOptions"
+              name="location"
+              class="mt-2 block w-full rounded-md border-0 py-2.5 pl-3 pr-10 font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-sky-300 sm:text-sm sm:leading-6"
+            >
+              <option value="ar">Arabic</option>
+              <option selected="selected" value="de">German</option>
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fi">Finnish</option>
+              <option value="fr">French</option>
+              <option value="hi">Hindi</option>
+              <option value="it">Italian</option>
+              <option value="ja">Japanese</option>
+              <option value="ko">Korean</option>
+              <option value="pl">Polish</option>
+              <option value="pt">Portuguese</option>
+              <option value="ru">Russian</option>
+              <option value="sv">Swedish</option>
+              <option value="zh-Hans">Chinese</option>
+            </select>
+          </div>
+
+          <button
+            id="startRecognizeOnceAsyncButton"
+            class="ml-1 mt-8 rounded-md bg-blue-600 px-3.5 py-2.5 pl-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+          >
+            <span class="flex items-center">
+              <span class="mr-1">Translate</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <table class="hidden">
+          <tr class="hidden">
+            <td align="right"><a href="https://docs.microsoft.com/azure/cognitive-services/speech-service/get-started" target="_blank">Subscription</a>:</td>
+            <td><input id="subscriptionKey" type="password" size="40" value="<%= subscriptionKey %>" /></td>
+          </tr>
+          <tr class="hidden">
+            <td align="right">Region</td>
+            <td><input id="serviceRegion" type="text" size="40" value="<%= serviceRegion %>" /></td>
+          </tr>
+        </table>
+
+        <!-- Translation Display -->
+        <!-- If user is logged in, render -->
+
+        <figure class="col-span-2 mt-16 hidden xs:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
+          <blockquote class="p-12 text-xl leading-8 tracking-tight text-gray-900">
+            <p id="phraseDiv">
+              “Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi
+              venenatis blandit vel et proin. Non hendrerit in vel ac diam.”
+            </p>
+          </blockquote>
+          <% if (user) { %>
+          <!-- Name, translate from, img -->
+          <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
+            <img class="h-10 w-10 flex-none rounded-full bg-gray-50" src="<%= user.image %>" alt="Profile Picture" />
+            <div class="flex-auto">
+              <div class="font-semibold"><%= user.displayName %></div>
+              <div><%= date %></div>
+            </div>
+
+            <form action="/saveTranslation" method="POST">
+              <div class="form-control mb-2 hidden">
+                <label for="translation" class="form-label mb-2">Translation</label>
+                <input type="text" id="translationInput" class="form-control" aria-describedby="translation" name="translation" />
+
+                <label for="sourceLanguage" class="form-label mb-2">Source Language</label>
+                <input type="text" id="sourceLanguageInput" class="form-control" aria-describedby="sourceLanguage" name="sourceLanguage" />
+
+                <label for="targetLanguage" class="form-label mb-2">Target Language</label>
+                <input type="text" id="targetLanguageInput" class="form-control" aria-describedby="targetLanguage" name="targetLanguage" />
+              </div>
+
+              <button id="submit" class="btn-ghost btn block">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                  />
+                </svg>
+              </button>
+            </form>
+          </figcaption>
+          <% } else { %>
+          <div class="hidden">
+            <input type="text" id="translationInput" />
+            <input type="text" id="sourceLanguageInput" />
+            <input type="text" id="targetLanguageInput" />
+          </div>
+          <% } %>
+        </figure>
+      </div>
+      <div class="mt-16 xs:hidden sm:mt-24 lg:mt-0 lg:block lg:flex-shrink-0 lg:flex-grow xl:pl-24">
+        <svg viewBox="0 0 366 729" role="img" class="mx-auto w-[22.875rem] max-w-full drop-shadow-xl">
+          <title>Text Conversation with Translation</title>
+          <defs>
+            <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
+              <rect width="316" height="684" rx="36" />
+            </clipPath>
+          </defs>
+          <path
+            fill="#4B5563"
+            d="M363.315 64.213C363.315 22.99 341.312 1 300.092 1H66.751C25.53 1 3.528 22.99 3.528 64.213v44.68l-.857.143A2 2 0 0 0 1 111.009v24.611a2 2 0 0 0 1.671 1.973l.95.158a2.26 2.26 0 0 1-.093.236v26.173c.212.1.398.296.541.643l-1.398.233A2 2 0 0 0 1 167.009v47.611a2 2 0 0 0 1.671 1.973l1.368.228c-.139.319-.314.533-.511.653v16.637c.221.104.414.313.56.689l-1.417.236A2 2 0 0 0 1 237.009v47.611a2 2 0 0 0 1.671 1.973l1.347.225c-.135.294-.302.493-.49.607v377.681c0 41.213 22 63.208 63.223 63.208h95.074c.947-.504 2.717-.843 4.745-.843l.141.001h.194l.086-.001 33.704.005c1.849.043 3.442.37 4.323.838h95.074c41.222 0 63.223-21.999 63.223-63.212v-394.63c-.259-.275-.48-.796-.63-1.47l-.011-.133 1.655-.276A2 2 0 0 0 366 266.62v-77.611a2 2 0 0 0-1.671-1.973l-1.712-.285c.148-.839.396-1.491.698-1.811V64.213Z"
+          />
+          <path fill="#343E4E" d="M16 59c0-23.748 19.252-43 43-43h246c23.748 0 43 19.252 43 43v615c0 23.196-18.804 42-42 42H58c-23.196 0-42-18.804-42-42V59Z" />
+          <foreignObject width="316" height="684" transform="translate(24 24)" clip-path="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)">
+            <img src="/imgs/Text.gif" alt="Text Conversation Gif" />
+          </foreignObject>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div id="content" style="display: none"></div>
+  <div id="warning"></div>
+
+  <!-- Flag Carousel -->
+  <div class="slideshow-container mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="slideshow mx-auto grid max-w-lg grid-cols-4 items-center gap-y-12 xs:gap-x-20 sm:max-w-xl sm:grid-cols-6 sm:gap-y-14 lg:mx-0 lg:max-w-none lg:grid-cols-5 lg:gap-x-20"
+    >
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/usa.png" alt="USA Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/germany.png" alt="Germany Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/spain.png" alt="Spain Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/france.png" alt="France Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/italy.png" alt="Italy Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/japan.png" alt="Japan Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/south-korea.png" alt="South Korea Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/sweden.png" alt="Sweden Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/finland.png" alt="Finland Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/india.png" alt="India Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/russia.png" alt="Russia Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/mexico.png" alt="Mexico Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/brazil.png" alt="Brazil Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/china.png" alt="China Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/poland.png" alt="Poland Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/portugal.png" alt="Portugal Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/usa.png" alt="USA Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/germany.png" alt="Germany Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/spain.png" alt="Spain Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/france.png" alt="France Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/italy.png" alt="Italy Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/japan.png" alt="Japan Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/south-korea.png" alt="South Korea Flag" width="158" height="48" />
+      <img class="col-span-2 max-h-24 w-full object-contain lg:col-span-1" src="/imgs/sweden.png" alt="Sweden Flag" width="158" height="48" />
+    </div>
+  </div>
+
+  <!-- Testimonials section -->
+  <div class="relative isolate mt-28 sm:mt-40 sm:pt-16">
+    <svg class="absolute inset-0 -z-10 hidden h-full w-full stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)] sm:block" aria-hidden="true">
+      <defs>
+        <pattern id="55d3d46d-692e-45f2-becd-d8bdc9344f45" width="200" height="200" x="50%" y="0" patternUnits="userSpaceOnUse">
+          <path d="M.5 200V.5H200" fill="none" />
+        </pattern>
+      </defs>
+      <svg x="50%" y="0" class="overflow-visible fill-gray-50">
+        <path d="M-200.5 0h201v201h-201Z M599.5 0h201v201h-201Z M399.5 400h201v201h-201Z M-400.5 600h201v201h-201Z" stroke-width="0" />
+      </svg>
+      <rect width="100%" height="100%" stroke-width="0" fill="url(#55d3d46d-692e-45f2-becd-d8bdc9344f45)" />
+    </svg>
+    <div class="relative">
+      <div class="absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 transform-gpu overflow-hidden opacity-20 blur-3xl" aria-hidden="true">
+        <div
+          class="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#38bdf8] to-[#22d3ee]"
+          style="
+            clip-path: polygon(
+              74.1% 44.1%,
+              100% 61.6%,
+              97.5% 26.9%,
+              85.5% 0.1%,
+              80.7% 2%,
+              72.5% 32.5%,
+              60.2% 62.4%,
+              52.4% 68.1%,
+              47.5% 58.3%,
+              45.2% 34.5%,
+              27.5% 76.7%,
+              0.1% 64.9%,
+              17.9% 100%,
+              27.6% 76.8%,
+              76.1% 97.7%,
+              74.1% 44.1%
+            );
+          "
+        ></div>
+      </div>
+      <div class="absolute inset-x-0 top-0 -z-10 flex transform-gpu overflow-hidden pt-8 opacity-30 blur-2xl xl:justify-end" aria-hidden="true">
+        <div
+          class="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[20deg] bg-gradient-to-tr from-[#bae6fd] to-[#a5f3fc] xl:ml-0 xl:mr-[calc(50%-12rem)]"
+          style="
+            clip-path: polygon(
+              74.1% 44.1%,
+              100% 61.6%,
+              97.5% 26.9%,
+              85.5% 0.1%,
+              80.7% 2%,
+              72.5% 32.5%,
+              60.2% 62.4%,
+              52.4% 68.1%,
+              47.5% 58.3%,
+              45.2% 34.5%,
+              27.5% 76.7%,
+              0.1% 64.9%,
+              17.9% 100%,
+              27.6% 76.8%,
+              76.1% 97.7%,
+              74.1% 44.1%
+            );
+          "
+        ></div>
+      </div>
+      <div class="mx-auto max-w-7xl px-6 lg:px-8 lg:py-10">
+        <div class="mx-auto max-w-xl sm:text-center">
+          <h3 class="mt-1 text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">Recent Translations</h3>
+        </div>
+        <div
+          class="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4"
+        >
+          <figure class="col-span-2 hidden sm:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
+            <blockquote class="p-12 text-2xl font-semibold leading-8 tracking-tight text-gray-900">
+              <p><%=translations[0].translation %></p>
+            </blockquote>
+            <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
+              <img class="h-10 w-10 flex-none rounded-full bg-gray-50" src="<%=translations[0].userImage %>" alt="" />
+              <div class="flex-auto">
+                <div class="font-semibold"><%=translations[0].userDisplayName %></div>
+                <div class="">
+                  Translated from <span class="font-semibold"><%=translations[0].sourceLanguage %></span> to
+                  <span class="font-semibold"><%=translations[0].targetLanguage %></span>
+                </div>
+              </div>
+              <img class="h-10 w-auto flex-none" src="/imgs/language.png" alt="SoundScript Logo" />
+            </figcaption>
+          </figure>
+          <div class="space-y-8 xl:contents xl:space-y-0">
+            <div class="space-y-8 xl:row-span-2">
+              <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
+                <blockquote class="text-gray-900">
+                  <p>“<%=translations[1].translation %>”</p>
                 </blockquote>
-                <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
-                  <img class="h-10 w-10 flex-none rounded-full bg-gray-50" src="<%=translations[0].userImage %>" alt="" />
-                  <div class="flex-auto">
-                    <div class="font-semibold"><%=translations[0].userDisplayName %></div>
-                    <div class="">
-                      Translated from <span class="font-semibold"><%=translations[0].sourceLanguage %></span> to
-                      <span class="font-semibold"><%=translations[0].targetLanguage %></span>
+                <figcaption class="mt-6 flex items-center gap-x-4">
+                  <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[1].userImage %>" alt="" />
+                  <div>
+                    <div class="font-semibold"><%=translations[1].userDisplayName %></div>
+                    <div class="text-sm">
+                      Translated from <span class="font-semibold"><%=translations[1].sourceLanguage %></span> to
+                      <span class="font-semibold"><%=translations[1].targetLanguage %></span>
                     </div>
                   </div>
-                  <img class="h-10 w-auto flex-none" src="/imgs/language.png" alt="SoundScript Logo" />
                 </figcaption>
               </figure>
-              <div class="space-y-8 xl:contents xl:space-y-0">
-                <div class="space-y-8 xl:row-span-2">
-                  <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                    <blockquote class="text-gray-900">
-                      <p>“<%=translations[1].translation %>”</p>
-                    </blockquote>
-                    <figcaption class="mt-6 flex items-center gap-x-4">
-                      <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[1].userImage %>" alt="" />
-                      <div>
-                        <div class="font-semibold"><%=translations[1].userDisplayName %></div>
-                        <div class="text-sm">
-                          Translated from <span class="font-semibold"><%=translations[1].sourceLanguage %></span> to
-                          <span class="font-semibold"><%=translations[1].targetLanguage %></span>
-                        </div>
-                      </div>
-                    </figcaption>
-                  </figure>
-                  <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                    <blockquote class="text-gray-900">
-                      <p>“<%=translations[2].translation %>”</p>
-                    </blockquote>
-                    <figcaption class="mt-6 flex items-center gap-x-4">
-                      <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[2].userImage %>" alt="" />
-                      <div>
-                        <div class="font-semibold"><%=translations[2].userDisplayName %></div>
-                        <div class="text-sm">
-                          Translated from <span class="font-semibold"><%=translations[2].sourceLanguage %></span> to
-                          <span class="font-semibold"><%=translations[2].targetLanguage %></span>
-                        </div>
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="space-y-8 xl:row-start-1">
-                  <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                    <blockquote class="text-gray-900">
-                      <p>“<%=translations[3].translation %>”</p>
-                    </blockquote>
-                    <figcaption class="mt-6 flex items-center gap-x-4">
-                      <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[3].userImage %>" alt="" />
-                      <div>
-                        <div class="font-semibold"><%=translations[3].userDisplayName %></div>
-                        <div class="">
-                          Translated from <span class="font-semibold"><%=translations[3].sourceLanguage %></span> to
-                          <span class="font-semibold"><%=translations[3].targetLanguage %></span>
-                        </div>
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-              </div>
-              <div class="space-y-8 xl:contents xl:space-y-0">
-                <div class="space-y-8 xl:row-start-1">
-                  <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                    <blockquote class="text-gray-900">
-                      <p>“<%=translations[4].translation %>”</p>
-                    </blockquote>
-                    <figcaption class="mt-6 flex items-center gap-x-4">
-                      <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[4].userImage %>" alt="" />
-                      <div>
-                        <div class="font-semibold"><%=translations[4].userDisplayName %></div>
-                        <div class="">
-                          Translated from <span class="font-semibold"><%=translations[4].sourceLanguage %></span> to
-                          <span class="font-semibold"><%=translations[4].targetLanguage %></span>
-                        </div>
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="space-y-8 xl:row-span-2">
-                  <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                    <blockquote class="text-gray-900">
-                      <p>“<%=translations[5].translation %>”</p>
-                    </blockquote>
-                    <figcaption class="mt-6 flex items-center gap-x-4">
-                      <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[5].userImage %>" alt="" />
-                      <div>
-                        <div class="font-semibold"><%=translations[5].userDisplayName %></div>
-                        <div class="">
-                          Translated from <span class="font-semibold"><%=translations[5].sourceLanguage %></span> to
-                          <span class="font-semibold"><%=translations[5].targetLanguage %></span>
-                        </div>
-                      </div>
-                    </figcaption>
-                  </figure>
+              <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
+                <blockquote class="text-gray-900">
+                  <p>“<%=translations[2].translation %>”</p>
+                </blockquote>
+                <figcaption class="mt-6 flex items-center gap-x-4">
+                  <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[2].userImage %>" alt="" />
+                  <div>
+                    <div class="font-semibold"><%=translations[2].userDisplayName %></div>
+                    <div class="text-sm">
+                      Translated from <span class="font-semibold"><%=translations[2].sourceLanguage %></span> to
+                      <span class="font-semibold"><%=translations[2].targetLanguage %></span>
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="space-y-8 xl:row-start-1">
+              <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
+                <blockquote class="text-gray-900">
+                  <p>“<%=translations[3].translation %>”</p>
+                </blockquote>
+                <figcaption class="mt-6 flex items-center gap-x-4">
+                  <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[3].userImage %>" alt="" />
+                  <div>
+                    <div class="font-semibold"><%=translations[3].userDisplayName %></div>
+                    <div class="">
+                      Translated from <span class="font-semibold"><%=translations[3].sourceLanguage %></span> to
+                      <span class="font-semibold"><%=translations[3].targetLanguage %></span>
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="space-y-8 xl:contents xl:space-y-0">
+            <div class="space-y-8 xl:row-start-1">
+              <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
+                <blockquote class="text-gray-900">
+                  <p>“<%=translations[4].translation %>”</p>
+                </blockquote>
+                <figcaption class="mt-6 flex items-center gap-x-4">
+                  <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[4].userImage %>" alt="" />
+                  <div>
+                    <div class="font-semibold"><%=translations[4].userDisplayName %></div>
+                    <div class="">
+                      Translated from <span class="font-semibold"><%=translations[4].sourceLanguage %></span> to
+                      <span class="font-semibold"><%=translations[4].targetLanguage %></span>
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <div class="space-y-8 xl:row-span-2">
+              <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
+                <blockquote class="text-gray-900">
+                  <p>“<%=translations[5].translation %>”</p>
+                </blockquote>
+                <figcaption class="mt-6 flex items-center gap-x-4">
+                  <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[5].userImage %>" alt="" />
+                  <div>
+                    <div class="font-semibold"><%=translations[5].userDisplayName %></div>
+                    <div class="">
+                      Translated from <span class="font-semibold"><%=translations[5].sourceLanguage %></span> to
+                      <span class="font-semibold"><%=translations[5].targetLanguage %></span>
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
 
-                  <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
-                    <blockquote class="text-gray-900">
-                      <p>“<%=translations[6].translation %>”</p>
-                    </blockquote>
-                    <figcaption class="mt-6 flex items-center gap-x-4">
-                      <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[6].userImage %>" alt="" />
-                      <div>
-                        <div class="font-semibold"><%=translations[6].userDisplayName %></div>
-                        <div class="">
-                          Translated from <span class="font-semibold"><%=translations[6].sourceLanguage %></span> to
-                          <span class="font-semibold"><%=translations[6].targetLanguage %></span>
-                        </div>
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-              </div>
+              <figure class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5">
+                <blockquote class="text-gray-900">
+                  <p>“<%=translations[6].translation %>”</p>
+                </blockquote>
+                <figcaption class="mt-6 flex items-center gap-x-4">
+                  <img class="h-10 w-10 rounded-full bg-gray-50" src="<%=translations[6].userImage %>" alt="" />
+                  <div>
+                    <div class="font-semibold"><%=translations[6].userDisplayName %></div>
+                    <div class="">
+                      Translated from <span class="font-semibold"><%=translations[6].sourceLanguage %></span> to
+                      <span class="font-semibold"><%=translations[6].targetLanguage %></span>
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+  </div>
+</main>
 
-    <!-- Footer -->
-    <footer class="bg-white mt-7">
-      <div class="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
-        <div class="flex justify-center space-x-6 md:order-2">
-          <a href="https://www.linkedin.com/in/alex-covone/" class="text-gray-400 hover:text-gray-500" target="_blank">
-            <span class="sr-only">LinkedIn</span>
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715zM7.003 8.575a1.546 1.546 0 01-1.548-1.549 1.548 1.548 0 111.547 1.549zm1.336 9.764H5.666V9.75H8.34v8.589zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.003z"
-              ></path>
-            </svg>
-          </a>
-          <a href="https://twitter.com/AlexCovone" class="text-gray-400 hover:text-gray-500" target="_blank">
-            <span class="sr-only">Twitter</span>
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
-              />
-            </svg>
-          </a>
-          <a href="https://github.com/AlexCovone" class="text-gray-400 hover:text-gray-500" target="_blank">
-            <span class="sr-only">GitHub</span>
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill-rule="evenodd"
-                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </a>
-          <a href="https://www.alexcovone.com/" class="text-gray-400 hover:text-gray-500" target="_blank">
-            <span class="sr-only">Portfolio</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-              />
-            </svg>
-          </a>
-        </div>
-        <div class="mt-8 md:order-1 md:mt-0">
-          <p class="text-center text-xs leading-5 text-gray-500">&copy; <%= currentYear %> Alex Covone. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
+<!-- Scripts, Speech SDK reference sdk. -->
+<script>
+  setTimeout(() => {
+    const errorToast = document.getElementById('error-toast');
+    const successToast = document.getElementById('success-toast');
 
-    <!-- Scripts, Speech SDK reference sdk. -->
-    <script>
+    if (errorToast) {
+      errorToast.classList.add('opacity-0');
       setTimeout(() => {
-        const errorToast = document.getElementById('error-toast');
-        const successToast = document.getElementById('success-toast');
+        errorToast.remove();
+      }, 2000);
+    }
 
-        if (errorToast) {
-          errorToast.classList.add('opacity-0');
-          setTimeout(() => {
-            errorToast.remove();
-          }, 2000);
-        }
+    if (successToast) {
+      successToast.classList.add('opacity-0');
+      setTimeout(() => {
+        successToast.remove();
+      }, 2000);
+    }
+  }, 5000);
+</script>
 
-        if (successToast) {
-          successToast.classList.add('opacity-0');
-          setTimeout(() => {
-            successToast.remove();
-          }, 2000);
-        }
-      }, 5000);
-    </script>
+<script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+<script src="main.js"></script>
 
-    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
-    <script src="main.js"></script>
-  </body>
-</html>
+<%- include('partials/footer') -%>
