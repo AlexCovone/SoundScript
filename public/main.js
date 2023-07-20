@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   startRecognizeOnceAsyncButton.addEventListener('click', function () {
     startRecognizeOnceAsyncButton.disabled = true;
-    phraseDiv.innerText = '';
+
+    phraseDiv.innerText = 'Speak now to translate';
 
     if (subscriptionKey.value === '' || subscriptionKey.value === 'subscription') {
       alert('Please enter your Microsoft Cognitive Services Speech subscription key!');
@@ -43,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
       function (result) {
         startRecognizeOnceAsyncButton.disabled = false;
         let translation = result.translations.get(language);
-        phraseDiv.innerText += translation;
+        phraseDiv.innerText = translation;
 
         // Form Inputs for POST request
         translationInput.value = translation;
@@ -55,9 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       function (err) {
         startRecognizeOnceAsyncButton.disabled = false;
-        // TODO:
-        // Add alert?
-        phraseDiv.innerText += 'Requested device not found. Please initialize microphone.';
+
+        phraseDiv.innerText = 'Please try again.';
+        alert('Requested device not found. Please initialize a microphone.');
+
         console.log(err);
         window.console.log(err);
 
