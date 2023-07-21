@@ -5,6 +5,7 @@ module.exports = {
   content: ["./views/**/*.ejs"],
   theme: {
     screens: {
+      custom: '452px',
       xs: '330px',
       sm: '480px',
       md: '768px',
