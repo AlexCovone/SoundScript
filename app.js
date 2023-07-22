@@ -71,7 +71,7 @@ app.get('/', async (req, res) => {
   console.log(message);
 
   // Select 7 random documents in Translation collection
-  const sampleCollection = db.collection('sampleTranslations');
+  const sampleCollection = db.collection('exampleTranslations');
   const translations = await sampleCollection.aggregate([{ $sample: { size: 7 } }]).toArray();
 
   res.render('index.ejs', { date, currentYear: year, subscriptionKey, serviceRegion, message, translations, user: req.user });
