@@ -2398,14 +2398,6 @@ html {
 }
 
 @media (min-width: 452px) {
-  .custom\:mt-10 {
-    margin-top: 2.5rem;
-  }
-
-  .custom\:mt-12 {
-    margin-top: 3rem;
-  }
-
   .custom\:mt-8 {
     margin-top: 2rem;
   }
