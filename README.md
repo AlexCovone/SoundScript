@@ -4,7 +4,7 @@ SoundScript is a full stack web application built for the non-profit Be the Chan
 
 The application addresses the language barrier and enables seamless communication across languages by transcribing spoken words into text in the user's desired language.
 
-**Live Website:** [Coming Soon]
+**Live Website:** [SoundScript](https://soundscript.cyclic.app/)
 
 ![Feature Section for SoundScript](https://github.com/AlexCovone/SoundScript/assets/98838825/cec3079a-179a-4120-8188-f2851c349065)
 
