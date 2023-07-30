@@ -71,11 +71,11 @@ app.get('/', async (req, res) => {
   console.log(message);
 
   // Select 7 random documents in Translation collection
-  // const sampleCollection = db.collection('exampleTranslations');
-  // const translations = await sampleCollection.aggregate([{ $sample: { size: 7 } }]).toArray();
+  const sampleCollection = db.collection('sampleTranslations');
+  const translations = await sampleCollection.aggregate([{ $sample: { size: 7 } }]).toArray();
   // remove translations from render
 
-  res.render('index.ejs', { date, currentYear: year, subscriptionKey, serviceRegion, message, user: req.user });
+  res.render('index.ejs', { date, currentYear: year, subscriptionKey, serviceRegion, translations, message, user: req.user,  });
 });
 
 // Login, Logout, Signup Routes
