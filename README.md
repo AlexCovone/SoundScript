@@ -10,7 +10,7 @@ The application addresses the language barrier and enables seamless communicatio
 
 ## How It's Made
 
-**Tech Used:** JavaScript, Node.js, Microsoft Cognitive Services, Express, MongoDB, EJS, TailwindCSS, Passport.js.
+**Tech Used:** JavaScript, Node.js, Microsoft Azure Cognitive Services, Express, MongoDB, EJS, TailwindCSS, Passport.js.
 
 SoundScript's codebase is structured using the Model-View-Controller architecture paradigm. 
 
