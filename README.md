@@ -10,7 +10,7 @@ The application addresses the language barrier and enables seamless communicatio
 
 ## How It's Made
 
-**Tech Used:** JavaScript, Node.js, Microsoft Cognitive Services, Express, MongoDB, EJS, TailwindCSS, Passport.js.
+**Tech Used:** JavaScript, Node.js, Microsoft Azure Cognitive Services, Express, MongoDB, EJS, TailwindCSS, Passport.js.
 
 SoundScript's codebase is structured using the Model-View-Controller architecture paradigm. 
 
@@ -26,9 +26,9 @@ For logged-in users, the application provides the ability to save translations t
 
 Saved translations will be displayed on the user's profile with key details such as the translated text, source language, target language, and the date of the translation. This allows users to easily identify and reference their saved translations with all the necessary information.
 
-### **Registration**
+https://github.com/AlexCovone/SoundScript/assets/98838825/db2796aa-12e2-4ff6-88a7-dfa90396d361
 
-![Login Page](https://github.com/AlexCovone/SoundScript/assets/98838825/927ddb3e-b8d5-4196-98e1-8ccfcd95d46d)
+### **Registration**
 
 SoundScript is designed to be accessible to all users, regardless of whether they choose to create an account and log in or simply use the application without authentication.
 
