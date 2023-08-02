@@ -59,7 +59,7 @@ app.use(flash());
 
 // Landing Page Route
 const { getFormattedCurrentDate, getCurrentYear, getRandomDocuments } = require('./controllers/services/helperFunctions');
-const { sampleTranslations } = require('./controllers/services/sampleData')
+const { sampleTranslations } = require('./controllers/services/sampleData');
 
 app.get('/', async (req, res) => {
   const date = getFormattedCurrentDate();
@@ -70,7 +70,7 @@ app.get('/', async (req, res) => {
   };
   console.log(message);
 
-  const translations = getRandomDocuments(sampleTranslations, 7)
+  const translations = getRandomDocuments(sampleTranslations, 7);
 
   res.render('index.ejs', { date, currentYear: year, subscriptionKey, serviceRegion, translations, message, user: req.user });
 });
