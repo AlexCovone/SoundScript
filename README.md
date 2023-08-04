@@ -16,7 +16,7 @@ SoundScript's codebase is structured using the Model-View-Controller architectur
 
 ### **Translation** 
 
-SoundScript leverages the capabilities of Microsoft Azure Cognitive Services to enhance its translation capabilities.
+SoundScript leverages Microsoft Azure Cognitive Services and utilizes customized pretrained models to enhance its translation capabilities.
 
 Users are able to select from 15 languages for their desired translation. Through the integration of Microsoft Azure Cognitive Services, the spoken words are instantly translated into the target language text, ensuring seamless and accurate real-time translation.
 
@@ -50,7 +50,7 @@ Additional features and optimizations include:
 
 
 ## Lessons Learned
-* Leverage Microsoft Azure Cognitive Services.
+* Leverage Microsoft Azure Cognitive Services and learn to utilize customized pretrained models.
 * Implement multi-part authentication strategies.
 * Maintain consistent communication with Be the Change Generation throughout the design and development process.
 * Provide detailed design briefs, including goals, and target audience.
