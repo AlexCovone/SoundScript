@@ -50,7 +50,7 @@ Additional features and optimizations include:
 
 
 ## Lessons Learned
-* Leverage Microsoft Azure Cognitive Services and learn to utilize customized pretrained models.
+* Leverage Microsoft Azure Cognitive Services and learn to utilize and customize pretrained models.
 * Implement multi-part authentication strategies.
 * Maintain consistent communication with Be the Change Generation throughout the design and development process.
 * Provide detailed design briefs, including goals, and target audience.
