@@ -43,6 +43,7 @@ As time permits, there are additional optimizations, improvements, and additiona
 
 Additional features and optimizations include:
 
+* Develop plugin for Microsoft Teams to support closed captions on multi-lingual calls.
 * Application will be migrated to a React-based framework.
 * Additional authentication strategies will be implemented (e.g. Twitter, Apple, Microsoft, etc).
 * Users will have the option to opt-in and showcase their translations in the 'Recent Translation' category to share their multilingual communication achievements.
