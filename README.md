@@ -1,6 +1,6 @@
 # SoundScript - Breaking the Language Barrier
 
-SoundScript is a full stack web application built for the non-profit Be the Change Generation. 
+SoundScript is a full stack web application built for Be the Change Generation, a non-profit organization that provides youth with intercultural exchange opportunities. 
 
 The application addresses the language barrier and enables seamless communication across languages by transcribing spoken words into text in the user's desired language.
 
