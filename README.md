@@ -2,7 +2,7 @@
 
 SoundScript is a full stack web application built for Be the Change Generation, a non-profit organization that provides youth with intercultural exchange opportunities. 
 
-The application addresses the language barrier and enables seamless communication across languages by transcribing spoken words into text in the user's desired language.
+This application addresses the language barrier and enables seamless communication across languages by transcribing spoken words into text in the user's desired language.
 
 **Live Website:** [SoundScript](https://soundscript.cyclic.app/)
 
