@@ -18,7 +18,7 @@ SoundScript's codebase is structured using the Model-View-Controller architectur
 
 SoundScript leverages Microsoft Azure Cognitive Services and utilizes customized pretrained models to enhance its translation capabilities.
 
-Users are able to select from 15 languages for their desired translation. Through the integration of Microsoft Azure Cognitive Services, the spoken words are instantly translated into the target language text, ensuring seamless and accurate real-time translation.
+Users can select from 15 languages for their desired translation. Through the integration of Microsoft Azure Cognitive Services, the spoken words are instantly translated into the target language text, ensuring seamless and accurate real-time translation.
 
 The application offers a selection of 15 languages for translation. By choosing the source and target languages, users can effortlessly speak in their chosen source language and witness real-time translation into the desired target language. 
 
@@ -36,7 +36,7 @@ For users who choose to create an account, they are presented with two authentic
 
 1. Google OAuth: Users can log in using their Google account. This authentication method is implemented using Passport.js and its Google OAuth 2.0 strategy.
 
-2. Local Strategy: Users have the option to create a local account using their email address and a custom password. This allows them to register directly with the application using their own credentials, providing a secure and personalized authentication method.
+2. Local Strategy: Users have the option to create a local account using their email address and a custom password. This allows them to register directly with the application using their credentials, providing a secure and personalized authentication method.
 
 ## Optimizations
 As time permits, there are additional optimizations, improvements, and additional features that will be added to SoundScript. 
